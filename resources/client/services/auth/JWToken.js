@@ -36,7 +36,7 @@ export default class JWToken {
             return false;
         }
 
-        return this.expiresAt < moment().unix();
+        return this.expiresAt > moment().unix();
     }
 
     getToken() {

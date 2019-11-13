@@ -23,7 +23,7 @@
                                             class="mb-3"
                                             prepend-icon="ni ni-email-83"
                                             placeholder="Email"
-                                            v-model="model.email">
+                                            v-model="email">
                                 </base-input>
 
                                 <base-input alternative
@@ -31,7 +31,7 @@
                                             prepend-icon="ni ni-lock-circle-open"
                                             type="password"
                                             placeholder="Password"
-                                            v-model="model.password">
+                                            v-model="password">
                                 </base-input>
 
                                 <div class="text-center">
@@ -57,20 +57,27 @@
 </template>
 <script>
     import AuthAPI from "@services/api/AuthAPI";
+    import AuthService from "@services/auth/AuthService";
 
     export default {
         name: "Login",
         data() {
             return {
-                model: {
-                    email: '',
-                    password: '',
-                }
+                email: '',
+                password: '',
             };
         },
         methods: {
             login() {
-                AuthAPI.login();
+                AuthAPI
+                  .login(this.email, this.password)
+                  .then((data) => {
+                      AuthService.logIn(data.access_token, data.expires_in);
+                      this.$router.push('/dashboard/overview');
+                  })
+                  .catch((err) => {
+                      console.log(err);
+                  })
             }
         }
     };

@@ -10,7 +10,7 @@ AuthAPI.login = function (email, password) {
             password
         })
         .then((res) => {
-            console.log(res);
+            return res.data.data;
         })
 };
 

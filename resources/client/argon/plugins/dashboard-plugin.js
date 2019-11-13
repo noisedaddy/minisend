@@ -18,6 +18,7 @@ import GlobalComponents from './globalComponents';
 // asset imports
 import '@argon/assets/sass/argon.scss';
 import '@argon/assets/css/nucleo/css/nucleo.css';
+import '@fortawesome/fontawesome-free/scss/fontawesome.scss'
 
 locale.use(lang);
 

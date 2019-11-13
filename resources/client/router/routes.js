@@ -3,7 +3,9 @@ import NotFound from "@shared/NotFound";
 import AuthLayout from "@src/Auth/AuthLayout"
 import Login from "@src/Auth/Login"
 import DashboardLayout from "@src/Dashboard/DashboardLayout";
-import Overview from "@src/Dashboard/Overview/Overview";
+import OverviewIndex from "@src/Dashboard/Overview/Index";
+import UsersIndex from "@src/Dashboard/Users/List/Index"
+import UsersCreate from "@src/Dashboard/Users/Create/Index"
 
 export default [
     {path: '/', component: Home},
@@ -27,9 +29,24 @@ export default [
         redirect: '/dashboard/overview',
         component: DashboardLayout,
         children: [
+            /**
+             * DASHBOARD
+             */
             {
                 path: 'overview',
-                component: Overview
+                component: OverviewIndex
+            },
+
+            /**
+             * USERS
+             */
+            {
+                path: 'users/list',
+                component: UsersIndex
+            },
+            {
+                path: 'users/create',
+                component: UsersCreate
             }
         ],
     },

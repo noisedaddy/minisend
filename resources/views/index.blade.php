@@ -7,7 +7,7 @@
     <title>OTest</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
-    <script src="{{asset('js/app.js')}}" async></script>
+    <script src="{{ mix('js/app.js') }}" async></script>
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">

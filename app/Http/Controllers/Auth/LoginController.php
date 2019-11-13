@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Login;
 use Illuminate\Http\Request;
+use \Illuminate\Auth\Events\Login as LoginEvent;
 
 class LoginController extends Controller
 {
@@ -18,10 +19,12 @@ class LoginController extends Controller
         $credentials = request(['email', 'password']);
 
         if (! $token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return $this->errorResponse('Invalid credentials.', 401);
         }
 
-        return response()->json([
+        event(new LoginEvent('jwt', auth()->user(), 'false'));
+
+        return $this->dataResponse([
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60
