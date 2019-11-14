@@ -12,7 +12,7 @@ Route::middleware('auth:api')->group(function () {
         Route::get('/', 'UsersController@index');
         Route::post('/', 'UsersController@create');
         Route::get('/{userId}', 'UsersController@read');
-        Route::put('/{userId}', 'UsersConroller@update');
+        Route::put('/{userId}', 'UsersController@update');
         Route::delete('/{userId}', 'UsersController@delete');
     });
 });
