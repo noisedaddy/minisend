@@ -19,7 +19,7 @@
         <div class="container-fluid mt--6">
             <div class="row">
                 <div class="col-12">
-                    <h1>Users</h1>
+                    <add-edit-form></add-edit-form>
                 </div>
             </div>
         </div>
@@ -28,11 +28,12 @@
 </template>
 <script>
     import BaseHeader from '@argon/components/BaseHeader';
-
+    import AddEditForm from '../Components/AddEditForm'
     export default {
         name: "CreateUsersIndex",
         components: {
             BaseHeader,
+            AddEditForm,
         },
         data() {
             return {};

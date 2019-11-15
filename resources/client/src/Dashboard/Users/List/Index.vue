@@ -41,7 +41,7 @@
 </template>
 <script>
     import BaseHeader from '@argon/components/BaseHeader';
-    import UserListTable from './components/UserListTable';
+    import UserListTable from '../Components/UserListTable';
     import Tabs from '@argon/components/Tabs/Tabs';
     import Tab from '@argon/components/Tabs/Tab';
 
