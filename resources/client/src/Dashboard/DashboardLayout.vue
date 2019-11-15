@@ -1,39 +1,26 @@
 <template>
     <div class="wrapper">
-        <BaseLoading v-if="loading" :full-page="false"></BaseLoading>
+        <notifications></notifications>
 
-        <div v-if="!loading">
-            <notifications></notifications>
-            <side-bar>
-                <template slot="links">
-                    <sidebar-item
-                        :link="{
-                    name: 'Dashboard',
-                    icon: 'ni ni-shop text-primary',
-                    path: '/dashboard/overview'
-                  }"
-                    >
-                    </sidebar-item>
+        <BaseLoading v-if="loading" :full-page="true"></BaseLoading>
 
-                    <sidebar-item :link="{
-                  name: 'Users',
-                  icon: 'fas fa-users text-primary'
-                  }">
-                        <sidebar-item :link="{ name: 'All Users', path: '/dashboard/users/list' }"/>
-                        <sidebar-item :link="{ name: 'Create New User', path: '/dashboard/users/create' }"/>
-                    </sidebar-item>
-                </template>
-            </side-bar>
-            <div class="main-content">
-                <dashboard-navbar type="light"></dashboard-navbar>
+        <div v-if="!loading" class="main-content">
+            <dashboard-navbar type="light"></dashboard-navbar>
 
-                <div @click="$sidebar.displaySidebar(false)">
-                    <fade-transition :duration="100" origin="center top" mode="out-in">
-                        <!-- your content here -->
-                        <router-view></router-view>
-                    </fade-transition>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div>
+                            <fade-transition :duration="100" origin="center top" mode="out-in">
+                                <!-- your content here -->
+                                <router-view></router-view>
+                            </fade-transition>
+                        </div>
+
+
+                        <dashboard-footer v-if="!$route.meta.hideFooter"></dashboard-footer>
+                    </div>
                 </div>
-                <dashboard-footer v-if="!$route.meta.hideFooter"></dashboard-footer>
             </div>
         </div>
     </div>
@@ -81,9 +68,9 @@
             FadeTransition
         },
         data() {
-          return {
-              loading: true
-          }
+            return {
+                loading: true
+            }
         },
         methods: {
             initScrollbar() {
@@ -108,5 +95,3 @@
         }
     };
 </script>
-<style lang="scss">
-</style>

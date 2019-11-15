@@ -3,7 +3,7 @@
         <div class="row align-items-center justify-content-lg-between">
             <div class="col-lg-6">
                 <div class="copyright text-center text-lg-left text-muted">
-                    © {{year}} <a href="https://www.theenglishquiz.com" class="font-weight-bold ml-1" target="_blank">TheEnglishQuiz</a>
+                    © {{year}} <a href="https://www.quizzology.io" class="font-weight-bold ml-1" target="_blank">Quizzology</a>
                 </div>
             </div>
             <div class="col-lg-6">

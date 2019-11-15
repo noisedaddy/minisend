@@ -1,7 +1,7 @@
 <template>
     <div :class="{'full-page' : fullPage === true}" class="baseLoading">
         <div>
-            <i class="fas fa-circle-notch fa-spin text-success"></i>
+            <i class="fas fa-circle-notch fa-spin text-otest"></i>
         </div>
     </div>
 </template>

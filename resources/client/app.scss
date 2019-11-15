@@ -1,0 +1,70 @@
+@use "sass:map";
+
+$otestPrimary: #00c9a7;
+
+/*
+$link-color: $otestPrimary !default;
+$link-hover-color: darken($link-color, 15%) !default;
+$nav-link-hover-color: $otestPrimary !default;
+$nav-pills-border-color: $otestPrimary !default;
+
+$nav-pills-link-color: $otestPrimary !default;
+$nav-pills-link-hover-color: darken($otestPrimary, 5%) !default;
+$nav-pills-link-active-color: color-yiq($otestPrimary) !default;
+$nav-pills-link-active-bg: $otestPrimary !default;
+
+*/
+.text-otest {
+    color: $otestPrimary;
+}
+
+@import './argon/assets/sass/argon.scss';
+@import './argon/assets/css/nucleo/css/nucleo.css';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
+
+.mainNavBarWrap {
+    position: sticky;
+    top: 0;
+    z-index: 300;
+}
+
+.mainNavBarSubheader {
+    border-bottom: 1px solid $gray-200;
+    background: $body-bg;
+    padding: 0;
+}
+
+#mainNavBarSubheaderInner {
+    ul li {
+        text-transform: uppercase;
+        font-weight: bold;
+        padding: 1rem 0 0.5rem;
+        border-bottom: 0.5rem solid transparent;
+        transition: background, border-color, 0.5s;
+    }
+}
+
+@media (min-width: map.get($grid-breakpoints, "lg")) {
+    #mainNavBarSubheaderInner {
+        ul li {
+            padding-right: 1.5rem;
+            padding-left: 1.5rem;
+        }
+    }
+
+    #mainNavBarSubheaderInner {
+        ul li.active {
+            background: $gray-200;
+
+            border-color: $otestPrimary;
+        }
+
+        ul li.active i {
+            color: $otestPrimary;
+        }
+    }
+}
+
+.quizzologyLogo {
+    max-width: 165px;
+}
