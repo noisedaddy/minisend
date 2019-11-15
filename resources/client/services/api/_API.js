@@ -19,7 +19,7 @@ export default class _API {
      */
     requestSuccess(config) {
         if (AuthService.isLoggedIn()) {
-            config.headers.Authorization = "Bearer " + AuthService.getJWToken();
+            //config.headers.Authorization = "Bearer " + AuthService.getJWToken();
         }
 
         return config;
