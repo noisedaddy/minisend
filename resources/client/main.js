@@ -4,6 +4,7 @@ import store from './store'
 import router from './router/router';
 import App from './App.vue';
 import {Select, Option} from 'element-ui'
+import "./app.scss";
 
 window._ = require('lodash');
 window.axios = require('axios');
