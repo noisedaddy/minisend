@@ -2,7 +2,7 @@
     <div class="wrapper">
         <notifications></notifications>
 
-        <BaseLoading v-if="loading" :full-page="false"></BaseLoading>
+        <BaseLoading v-if="loading" :full-page="true"></BaseLoading>
 
         <div v-if="!loading" class="main-content">
             <dashboard-navbar type="light"></dashboard-navbar>

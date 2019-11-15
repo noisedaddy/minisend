@@ -6,7 +6,7 @@
         >
             <template slot="brand">
                 <router-link  to="/dashboard/overview">
-                    <Logo></Logo>
+                    <img src="/img/quizzology.png" class="quizzologyLogo" alt="Quizzology">
                 </router-link>
             </template>
 
@@ -243,23 +243,31 @@
             </button>
             <div class="collapse navbar-collapse" :class="{'show': showSubHeaderMenu}" id="mainNavBarSubheaderInner">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0 ml-auto mr-auto">
-                    <li class="nav-item active">
+                    <li class="nav-item"
+                        :class="{'active' : $route.path.indexOf('dashboard/overview') > -1}"
+                    >
                         <router-link to="/dashboard/overview" class="nav-link">
                             <i class="fas fa-tachometer-alt"></i> Dashboard
                         </router-link>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item"
+                        :class="{'active' : $route.path.indexOf('dashboard/users') > -1}"
+                    >
                         <router-link to="/dashboard/users/list" class="nav-link">
                             <i class="fas fa-user-tie"></i> Users
                         </router-link>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item"
+                        :class="{'active' : $route.path.indexOf('dashboard/candidates') > -1}"
+                    >
                         <router-link to="/dashboard/candidates/list" class="nav-link">
                             <i class="fas fa-users"></i> Candidates
                         </router-link>
                     </li>
-                    <li class="nav-item">
-                        <router-link to="/dashboard/candidates/list" class="nav-link">
+                    <li class="nav-item"
+                        :class="{'active' : $route.path.indexOf('dashboard/tools') > -1}"
+                    >
+                        <router-link to="/dashboard/tools/list" class="nav-link">
                             <i class="fas fa-wrench"></i> Tools
                         </router-link>
                     </li>
@@ -271,12 +279,10 @@
 <script>
     import {BaseNav} from '@argon/components';
     import AuthService from "@services/auth/AuthService";
-    import Logo from "@src/Dashboard/Logo";
 
     export default {
         name: "DashboardNavbar",
         components: {
-            Logo,
             BaseNav,
         },
         props: {

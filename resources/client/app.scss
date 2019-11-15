@@ -38,7 +38,9 @@ $nav-pills-link-active-bg: $otestPrimary !default;
     ul li {
         text-transform: uppercase;
         font-weight: bold;
-        padding: 1rem 0 ;
+        padding: 1rem 0 0.5rem;
+        border-bottom: 0.5rem solid transparent;
+        transition: background, border-color, 0.5s;
     }
 }
 
@@ -53,11 +55,16 @@ $nav-pills-link-active-bg: $otestPrimary !default;
     #mainNavBarSubheaderInner {
         ul li.active {
             background: $gray-200;
+
+            border-color: $otestPrimary;
         }
 
         ul li.active i {
             color: $otestPrimary;
         }
     }
+}
 
+.quizzologyLogo {
+    max-width: 165px;
 }
