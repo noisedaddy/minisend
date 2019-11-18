@@ -33,10 +33,12 @@
                     <h3 class="mb-0">Users</h3>
                 </div>
                 <div class="col-6 text-right">
-                    <base-button icon type="primary" size="sm">
-                        <span class="btn-inner--icon"><i class="fas fa-user-plus"></i></span>
-                        <span class="btn-inner--text">New User</span>
-                    </base-button>
+                    <router-link to="/dashboard/users/create">
+                        <base-button icon type="primary" size="sm">
+                            <span class="btn-inner--icon"><i class="fas fa-user-plus"></i></span>
+                            <span class="btn-inner--text">New User</span>
+                        </base-button>
+                    </router-link>
                 </div>
             </div>
         </div>

@@ -41,7 +41,6 @@ class UsersController extends Controller
         }
     }
 
-
     public function store(CreateUser $request)
     {
         $user = auth()->user();

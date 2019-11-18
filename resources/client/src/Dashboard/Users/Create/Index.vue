@@ -1,17 +1,17 @@
 <template>
     <div>
         <base-header class="pb-6" type="">
-            <div class="row align-items-center py-4">
-                <div class="col-lg-6 col-7">
-                    <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
-                        <ol class="breadcrumb breadcrumb-links">
-                            <li class="breadcrumb-item">
-                                <router-link to="/"><i class="fas fa-home"></i></router-link>
-                            </li>
-                            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                            <li class="breadcrumb-item"><a href="#">Users</a></li>
-                        </ol>
-                    </nav>
+            <div class="row align-items-center pb-4">
+                <div class="col-6">
+                    <h6 class="h2 d-inline-block mb-0">Create New User</h6>
+                </div>
+                <div class="col-6 text-right">
+                    <router-link to="/dashboard/users/list">
+                        <base-button icon type="white" size="sm">
+                            <span class="btn-inner--icon"><i class="fas fa-arrow-circle-left"></i></span>
+                            <span class="btn-inner--text">Back</span>
+                        </base-button>
+                    </router-link>
                 </div>
             </div>
         </base-header>
@@ -29,6 +29,7 @@
 <script>
     import BaseHeader from '@argon/components/BaseHeader';
     import AddEditForm from '../Components/AddEditForm'
+
     export default {
         name: "CreateUsersIndex",
         components: {
