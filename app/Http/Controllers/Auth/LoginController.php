@@ -16,7 +16,7 @@ class LoginController extends Controller
 
     public function login(Login $request)
     {
-        $credentials = request(['email', 'password']);
+        $credentials = $request->only(['email', 'password']);
 
         if (! $token = auth()->attempt($credentials)) {
             return $this->errorResponse('Invalid credentials.', 401);
@@ -28,6 +28,6 @@ class LoginController extends Controller
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60
-        ])->header('Authorization', $token);
+        ]);
     }
 }
