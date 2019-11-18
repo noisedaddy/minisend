@@ -18,16 +18,16 @@ class LoginController extends Controller
     {
         $credentials = request(['email', 'password']);
 
-        if (! $token = auth()->attempt($credentials)) {
+        if (! $token = auth()->guard('api')->attempt($credentials)) {
             return $this->errorResponse('Invalid credentials.', 401);
         }
 
-        event(new LoginEvent('jwt', auth()->user(), 'false'));
+        event(new LoginEvent('jwt', auth()->guard('api')->user(), 'false'));
 
         return $this->dataResponse([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
+            'expires_in' => auth()->guard('api')->factory()->getTTL() * 60
         ])->header('Authorization', $token);
     }
 }

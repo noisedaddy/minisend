@@ -24,10 +24,10 @@ class UsersController extends Controller
         return UserResource::collection(\App\Models\User::all());
     }
 
-    public function read($id)
+    public function show($id)
     {
         if ($id === "me") {
-            return new UserResource(auth()->user());
+            return new UserResource(auth()->guard('api')->user());
         } else {
             // check if allowed to access user with this id
 
@@ -36,7 +36,7 @@ class UsersController extends Controller
     }
 
 
-    public function create(\Request $request){
+    public function store(\Request $request){
 
         $this->validate($request, [
             'first_name' => 'required',
