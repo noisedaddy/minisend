@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\Enums\UserRole;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -17,6 +18,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
+        'account_id',
         'email',
         'first_name',
         'last_name',
@@ -24,7 +26,6 @@ class User extends Authenticatable implements JWTSubject
         'role',
         'phone_number',
         'address',
-        'avatar',
         'position',
         'email_notifications',
         'last_login',
@@ -68,5 +69,21 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function isSuperAdmin() {
+        return $this->role === UserRole::SUPER_ADMIN;
+    }
+
+    public function isCompanyAdmin() {
+        return $this->role === UserRole::COMPANY_ADMIN;
+    }
+
+    public function isCompanyManager() {
+        return $this->role === UserRole::COMPANY_MANAGER;
+    }
+
+    public function isEvaluator() {
+        return $this->role === UserRole::EVALUATOR;
     }
 }

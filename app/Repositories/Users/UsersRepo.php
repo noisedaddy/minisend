@@ -11,8 +11,7 @@ class UsersRepo {
         return User::where('id', $id)->first();
     }
 
-    public function syncLoginDateTimes(User $user, $dateTime = null)
-    {
-
+    public function create($data) {
+        return User::create($data);
     }
 }

@@ -1,5 +1,6 @@
 <template>
     <div class="card">
+        <!--
         <div class="mt-3">
             <div class="col-12 d-flex justify-content-center justify-content-sm-between flex-wrap">
                 <el-select
@@ -22,6 +23,20 @@
                                 prepend-icon="fas fa-search"
                                 placeholder="Search...">
                     </base-input>
+                </div>
+            </div>
+        </div>
+        -->
+        <div class="card-header">
+            <div class="row">
+                <div class="col-6">
+                    <h3 class="mb-0">Users</h3>
+                </div>
+                <div class="col-6 text-right">
+                    <base-button icon type="primary" size="sm">
+                        <span class="btn-inner--icon"><i class="fas fa-user-plus"></i></span>
+                        <span class="btn-inner--text">New User</span>
+                    </base-button>
                 </div>
             </div>
         </div>
@@ -86,7 +101,8 @@
 
 <script>
     import users from '../List/users'
-    import { Table, TableColumn, DropdownMenu, DropdownItem, Dropdown } from 'element-ui'
+    import {Table, TableColumn, DropdownMenu, DropdownItem, Dropdown} from 'element-ui'
+
     export default {
         name: "UserListTable",
         components: {

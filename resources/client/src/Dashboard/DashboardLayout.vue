@@ -5,23 +5,14 @@
         <BaseLoading v-if="loading" :full-page="true"></BaseLoading>
 
         <div v-if="!loading" class="main-content">
-            <dashboard-navbar type="light"></dashboard-navbar>
+            <dashboard-navbar type="light" class="mb-30px"></dashboard-navbar>
 
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <div>
-                            <fade-transition :duration="100" origin="center top" mode="out-in">
-                                <!-- your content here -->
-                                <router-view></router-view>
-                            </fade-transition>
-                        </div>
+            <fade-transition :duration="100" origin="center top" mode="out-in">
+                <!-- your content here -->
+                <router-view></router-view>
+            </fade-transition>
 
-
-                        <dashboard-footer v-if="!$route.meta.hideFooter"></dashboard-footer>
-                    </div>
-                </div>
-            </div>
+            <dashboard-footer v-if="!$route.meta.hideFooter"></dashboard-footer>
         </div>
     </div>
 </template>

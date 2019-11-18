@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Users\CreateUser;
 use App\Http\Resources\User;
 use App\Repositories\Users\UsersRepo;
 use App\Http\Resources\User as UserResource;
@@ -15,62 +16,57 @@ class UsersController extends Controller
         $this->usersRepo = $usersRepo;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index() {
         return UserResource::collection(\App\Models\User::all());
     }
 
     public function show($id)
     {
+        $currentUser = auth()->user();
+
         if ($id === "me") {
-            return new UserResource(auth()->guard('api')->user());
+            return new UserResource($currentUser);
+        }
+
+        $showUser = $this->usersRepo->find($id);
+
+        if (!$showUser) {
+            return $this->notFound();
+        }
+
+        if ($currentUser->can('view', $showUser)) {
+            return new UserResource($showUser);
         } else {
-            // check if allowed to access user with this id
-
-            return new UserResource($this->usersRepo->find($id));
+            return $this->forbidden();
         }
     }
 
 
-    public function store(\Request $request){
+    public function store(CreateUser $request)
+    {
+        $user = auth()->user();
+        $data = $request->all();
 
-        $this->validate($request, [
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required',
-//            'image' => 'required|mimes:jpeg,png,jpg,gif,svg',
-        ]);
-
-        $user = new \App\Models\User();
-
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $name = str_slug($request->title) . '.' . $image->getClientOriginalExtension();
-            $destinationPath = public_path('/images/user_media');
-            $imagePath = $destinationPath . "/" . $name;
-            $image->move($destinationPath, $name);
-            $user->avatar = $name;
+        if (!$user->can('create')) {
+            return $this->forbidden();
         }
 
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
-        $user->email = $request->email;
-        $user->avatar = $request->avatar;
-        $user->save();
+        if ($user->isCompanyAdmin()) {
+            $data['account_id'] = $user['account_id'];
+        }
 
-        return new UserResource($user);
+        $newUser = $this->usersRepo->create($data);
 
+        return new UserResource($newUser);
     }
+
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
+     * @param \Request $request
+     * @param \App\Models\User $user
+     * @return UserResource
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(\Request $request, \App\Models\User $user)
     {
@@ -87,8 +83,9 @@ class UsersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Post  $post
+     * @param \App\Models\User $user
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
 
     public function delete(\App\Models\User $user)
