@@ -18,6 +18,7 @@ class UsersRepo implements UsersInterface {
     }
 
     public function create($data) {
+        $data['role'] = $data['role'] ?? 1;
         return User::create($data);
     }
 
