@@ -17,7 +17,7 @@ class CreateUser extends BaseRequest
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required',
-            'account_id' => ''
+//            'account_id' => ''
             // 'image' => 'required|mimes:jpeg,png,jpg,gif,svg',
         ];
     }

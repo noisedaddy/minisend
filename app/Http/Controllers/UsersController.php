@@ -17,7 +17,7 @@ class UsersController extends Controller
     }
 
     public function index() {
-        return UserResource::collection(\App\Models\User::all());
+        return UserResource::collection($this->usersRepo->all());
     }
 
     public function show($id)
@@ -69,12 +69,6 @@ class UsersController extends Controller
      */
     public function update(\Request $request, \App\Models\User $user)
     {
-        $this->validate($request, [
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required',
-        ]);
-
         $user->update($request->only(['first_name', 'last_name', 'email']));
         return new UserResource($user);
     }
