@@ -14,7 +14,7 @@ class UsersRepo implements UsersInterface {
 
     public function find($id)
     {
-        return User::where('id', $id)->first();
+        return QueryBuilder::for(User::class)->where('id', $id)->first();
     }
 
     public function create($data) {
