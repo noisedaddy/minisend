@@ -7,7 +7,6 @@
         <div v-if="!loading" class="main-content">
             <dashboard-navbar type="light" class="mb-30px"></dashboard-navbar>
 
-
             <router-view></router-view>
 
             <dashboard-footer v-if="!$route.meta.hideFooter"></dashboard-footer>
