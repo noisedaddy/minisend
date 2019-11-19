@@ -45,68 +45,98 @@
         <el-table
             class="table-responsive table-flush"
             header-row-class-name="thead-light"
-            :data="users">
-            <el-table-column label="ID"
-                             min-width="30px"
-                             prop="id"
-                             sortable>
+            row-key="id"
+            :data="queriedData"
+            @sort-change="sortChange"
+            @selection-change="selectionChange">
+            <el-table-column type="selection"
+                            min-width="120px">
             </el-table-column>
-            <el-table-column label="First Name"
-                             prop="firstName"
+            <el-table-column label="User"
+                             min-width="220px"
+                             prop="display_name"
                              sortable>
-            </el-table-column>
-            <el-table-column label="Last Name"
-                             prop="lastName"
-                             sortable>
+                <template v-slot="{row}">
+                    <div class="media align-items-center">
+                        <a href="#" class="avatar rounded-circle mr-3">
+                            <img alt="User avatar" :src="row.avatar || '/img/empty_user.png'">
+                        </a>
+                        <div class="media-body">
+                            <span class="font-weight-600 name mb-0 text-sm">{{row.display_name}}</span>
+                        </div>
+                    </div>
+                </template>
             </el-table-column>
             <el-table-column label="Email"
                              prop="email"
+                             min-width="140px"
                              sortable>
             </el-table-column>
-            <el-table-column label="Phone Number"
-                             prop="phone"
+            <!-- <el-table-column label="Last login"
+                             prop="last_login"
+                             min-width="180px"
                              sortable>
             </el-table-column>
-            <el-table-column label="Address"
-                             prop="address"
+            <el-table-column label="Entered"
+                             prop="entered"
+                             min-width="180px"
                              sortable>
-            </el-table-column>
-            <el-table-column label="Last login"
-                             prop="lastLogin"
-                             sortable>
-            </el-table-column>
-            <el-table-column label="Actions"
-                             min-width="80px"
-                             align="center">
+            </el-table-column> -->
+            <el-table-column min-width="50px" align="right">
                 <template v-slot="{row}">
                     <el-dropdown trigger="click" class="dropdown">
-                    <span class="btn btn-sm btn-icon-only text-light">
+                    <span class="btn btn-sm btn-icon-only">
                       <i class="fas fa-ellipsis-v mt-2"></i>
                     </span>
                         <el-dropdown-menu class="dropdown-menu dropdown-menu-arrow show" slot="dropdown">
                             <a class="dropdown-item" href="#">Action</a>
                             <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here {{ row.id}}</a>
+                            <a class="dropdown-item" href="#">Something else here {{ row.id }}</a>
                         </el-dropdown-menu>
                     </el-dropdown>
                 </template>
             </el-table-column>
+ 
         </el-table>
-        <div class="card-footer py-4 d-flex justify-content-end">
-            <base-pagination v-model="pagination.currentPage"
-                             :total="50"
-                             :per-page="pagination.perPage">
+        <div
+            slot="footer"
+            class="col-12 d-flex justify-content-center justify-content-sm-between flex-wrap"
+          >
+            <div class="">
+              <p class="card-category">
+                Showing {{ from + 1 }} to {{ to }} of {{ total }} entries
+
+                <span v-if="selectedRows.length">
+                  &nbsp; &nbsp; {{selectedRows.length}} rows selected
+                </span>
+              </p>
+
+            </div>
+            <base-pagination
+              class="pagination-no-border"
+              v-model="pagination.currentPage"
+              :per-page="pagination.perPage"
+              :total="total"
+            >
             </base-pagination>
-        </div>
+          </div>
     </div>
 </template>
 
 <script>
-    import users from '../List/users'
-    import {Table, TableColumn, DropdownMenu, DropdownItem, Dropdown} from 'element-ui'
+    import { mapGetters, mapActions } from "vuex";
+    import {
+        Table, 
+        TableColumn,
+        DropdownMenu,
+        DropdownItem, 
+        Dropdown
+    } from 'element-ui'
+    import usersPaginationMixin from './usersPaginationMixin'
 
     export default {
         name: "UserListTable",
+        mixins: [usersPaginationMixin],
         components: {
             [Table.name]: Table,
             [TableColumn.name]: TableColumn,
@@ -116,14 +146,23 @@
         },
         data() {
             return {
-                users,
-                searchQuery: '',
-                pagination: {
-                    perPage: 10,
-                    currentPage: 1,
-                    perPageOptions: [5, 10, 25, 50],
-                    total: 0
-                },
+                selectedRows: [],
+            }
+        },
+        computed: {
+            ...mapGetters({
+                users: 'users/users',
+            })
+        },
+        mounted() {
+            this.fetchUsers();
+        },
+        methods: {
+            ...mapActions({
+                fetchUsers: 'users/fetchUsers',
+            }),
+            selectionChange(selectedRows) {
+                this.selectedRows = selectedRows
             }
         }
     }
