@@ -5,7 +5,7 @@
                 <div class="col-sm-12 col-md-3">
                     <div class="card">
                         <div class="card-header">
-                            <h3>Filters</h3>
+                            <h3>{{$t('filters')}}</h3>
                         </div>
                     </div>
                 </div>

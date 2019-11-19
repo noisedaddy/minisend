@@ -16,7 +16,10 @@ export default [
         children: [
             {
                 path: 'login',
-                component: Login
+                component: Login,
+                meta: {
+                    title: "Login",
+                }
             },
             // {
             //     path: 'forgot-password',
@@ -34,7 +37,10 @@ export default [
              */
             {
                 path: 'overview',
-                component: OverviewIndex
+                component: OverviewIndex,
+                meta: {
+                    title: "Dashboard",
+                }
             },
 
             /**
@@ -42,11 +48,17 @@ export default [
              */
             {
                 path: 'users/list',
-                component: UsersIndex
+                component: UsersIndex,
+                meta: {
+                    title: "Users",
+                }
             },
             {
                 path: 'users/create',
-                component: UsersCreate
+                component: UsersCreate,
+                meta: {
+                    title: "Create a user",
+                }
             }
         ],
     },

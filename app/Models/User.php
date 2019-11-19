@@ -76,11 +76,11 @@ class User extends Authenticatable implements JWTSubject
     }
 
     public function isCompanyAdmin() {
-        return $this->role === UserRole::COMPANY_ADMIN;
+        return $this->role === UserRole::ACCOUNT_ADMIN;
     }
 
     public function isCompanyManager() {
-        return $this->role === UserRole::COMPANY_MANAGER;
+        return $this->role === UserRole::ACCOUNT_MANAGER;
     }
 
     public function isEvaluator() {

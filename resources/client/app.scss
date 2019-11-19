@@ -40,6 +40,14 @@ $nav-pills-link-active-bg: $otestPrimary !default;
         border-bottom: 0.5rem solid transparent;
         transition: background, border-color, 0.5s;
     }
+
+    ul li i {
+        transition: color, 0.5s;
+    }
+}
+
+.mainNavBarWrap .nav-link:hover {
+    color: $otestPrimary;
 }
 
 @media (min-width: #{map-get($grid-breakpoints, "lg")}) {
@@ -69,4 +77,12 @@ $nav-pills-link-active-bg: $otestPrimary !default;
 
 .mb-30px {
     margin-bottom: 30px;
+}
+
+.langFlag {
+    max-width: 25px;
+}
+
+.min-width-auto {
+    min-width: auto;
 }

@@ -16,13 +16,13 @@
                     <div class="card bg-secondary border-0 mb-0">
                         <div class="card-body px-lg-5 py-lg-5">
                             <div class="text-center text-muted mb-4">
-                                <small>Sign In</small>
+                                <small>{{ $t('signIn') }}</small>
                             </div>
                             <form role="form">
                                 <base-input alternative
                                             class="mb-3"
                                             prepend-icon="ni ni-email-83"
-                                            placeholder="Email"
+                                            :placeholder="$t('email')"
                                             v-model="email">
                                 </base-input>
 
@@ -30,7 +30,7 @@
                                             class="mb-3"
                                             prepend-icon="ni ni-lock-circle-open"
                                             type="password"
-                                            placeholder="Password"
+                                            :placeholder="$t('password')"
                                             v-model="password">
                                 </base-input>
 
@@ -38,7 +38,7 @@
                                     <base-button type="primary"
                                                  class="my-4"
                                                  @click="login">
-                                        Sign in
+                                        {{ $t('signIn') }}
                                     </base-button>
                                 </div>
                             </form>
@@ -46,7 +46,7 @@
                     </div>
                     <div class="row mt-3">
                         <div class="col-6">
-                            <router-link to="/auth/forgot-password" class="text-light"><small>Forgot password?</small>
+                            <router-link to="/auth/forgot-password" class="text-light"><small>{{ $t('forgotPassword') }}</small>
                             </router-link>
                         </div>
                     </div>

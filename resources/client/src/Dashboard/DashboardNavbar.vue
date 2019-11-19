@@ -5,24 +5,42 @@
             class="bg-white navbar-top border-bottom navbar-expand mainNavBarHeader"
         >
             <template slot="brand">
-                <router-link  to="/dashboard/overview">
+                <router-link to="/dashboard/overview">
                     <img src="/img/quizzology.png" class="quizzologyLogo" alt="Quizzology">
                 </router-link>
             </template>
 
             <!-- Navbar links -->
             <ul class="navbar-nav align-items-center ml-md-auto">
-                <li class="nav-item d-xl-none">
-
-                </li>
-                <li class="nav-item d-sm-none">
-                    <a class="nav-link" href="#" data-action="search-show" data-target="#navbar-search-main">
-                        <i class="ni ni-zoom-split-in"></i>
-                    </a>
-                </li>
+                <base-dropdown
+                    :has-toggle="false"
+                    class="nav-item"
+                    tag="li"
+                    title-tag="a"
+                    title-classes="nav-link pr-0"
+                    menuClasses="min-width-auto">
+                    <template>
+                        <a href="#" class="nav-link" @click.prevent slot="title">
+                            <div class="media align-items-center">
+                                <img alt="English" :src="'img/icons/flags/'+selectedLanguage.locale+'.png'" class="langFlag">
+                            </div>
+                        </a>
+                    </template>
+                    <template>
+                        <a
+                            v-for="(lang, i) in languages"
+                            :key="i"
+                            class="dropdown-item"
+                            @click="changeLanguage(lang.locale)"
+                        >
+                            <img :alt="lang.title" :src="'img/icons/flags/'+lang.locale+'.png'" class="langFlag">
+                            {{lang.title}}
+                        </a>
+                    </template>
+                </base-dropdown>
                 <base-dropdown class="nav-item"
                                tag="li"
-                               title-classes="nav-link"
+                               title-classes="nav-link text-otest"
                                title-tag="a"
                                icon="ni ni-bell-55"
                                menu-classes="dropdown-menu-xl dropdown-menu-right py-0 overflow-hidden">
@@ -144,7 +162,7 @@
                                tag="li"
                                title-tag="a"
                                title-classes="nav-link"
-                               icon="ni ni-ungroup">
+                               icon="fas fa-tools">
                     <template>
                         <div class="row shortcuts px-4">
                             <a href="#!" class="col-4 shortcut-item">
@@ -188,15 +206,18 @@
                 </base-dropdown>
             </ul>
             <ul class="navbar-nav align-items-center ml-auto ml-md-0">
-                <base-dropdown menu-on-right
-                               class="nav-item"
-                               tag="li"
-                               title-tag="a"
-                               title-classes="nav-link pr-0">
-                    <a href="#" class="nav-link pr-0" @click.prevent slot="title-container">
+                <base-dropdown
+                    :has-toggle="true"
+                    menu-on-right
+                    class="nav-item"
+                    tag="li"
+                    title-tag="a"
+                    title-classes="nav-link pr-0 d-flex align-items-center"
+                >
+                    <a href="#" class="nav-link pr-0" @click.prevent slot="title">
                         <div class="media align-items-center">
                   <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="img/theme/team-4.jpg">
+                    <img alt="Image placeholder" :src="currentUser.avatar ? currentUser.avatar :  '/img/empty_user.png'">
                   </span>
                             <div class="media-body ml-2 d-none d-lg-block">
                                 <span class="mb-0 text-sm  font-weight-bold">{{currentUser.first_name}} {{currentUser.last_name}}</span>
@@ -236,7 +257,8 @@
             </ul>
         </base-nav>
         <nav class="navbar navbar-expand-lg navbar-light mainNavBarSubheader">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavBarSubheaderInner" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation"
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavBarSubheaderInner"
+                    aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation"
                     @click="showSubHeaderMenu = !showSubHeaderMenu"
             >
                 <span class="navbar-toggler-icon"></span>
@@ -247,28 +269,21 @@
                         :class="{'active' : $route.path.indexOf('dashboard/overview') > -1}"
                     >
                         <router-link to="/dashboard/overview" class="nav-link">
-                            <i class="fas fa-tachometer-alt"></i> Dashboard
+                            <i class="fas fa-tachometer-alt"></i> {{ $t('dashboard') }}
                         </router-link>
                     </li>
                     <li class="nav-item"
                         :class="{'active' : $route.path.indexOf('dashboard/users') > -1}"
                     >
                         <router-link to="/dashboard/users/list" class="nav-link">
-                            <i class="fas fa-user-tie"></i> Users
+                            <i class="fas fa-user-tie"></i> {{ $t('users') }}
                         </router-link>
                     </li>
                     <li class="nav-item"
                         :class="{'active' : $route.path.indexOf('dashboard/candidates') > -1}"
                     >
                         <router-link to="/dashboard/candidates/list" class="nav-link">
-                            <i class="fas fa-users"></i> Candidates
-                        </router-link>
-                    </li>
-                    <li class="nav-item"
-                        :class="{'active' : $route.path.indexOf('dashboard/tools') > -1}"
-                    >
-                        <router-link to="/dashboard/tools/list" class="nav-link">
-                            <i class="fas fa-wrench"></i> Tools
+                            <i class="fas fa-users"></i> {{ $t('candidates') }}
                         </router-link>
                     </li>
                 </ul>
@@ -285,9 +300,7 @@
         components: {
             BaseNav,
         },
-        props: {
-
-        },
+        props: {},
         data() {
             return {
                 activeNotifications: false,
@@ -295,6 +308,16 @@
                 searchModalVisible: false,
                 searchQuery: '',
                 showSubHeaderMenu: false,
+                languages: [
+                    {
+                        locale: "en",
+                        title: "English"
+                    },
+                    {
+                        locale: "fr",
+                        title: "Français"
+                    }
+                ]
             }
         },
         computed: {
@@ -304,9 +327,21 @@
             },
             currentUser() {
                 return this.$store.state.users.currentUser;
+            },
+            selectedLanguage() {
+                for (let i = 0; i < this.languages.length; i++) {
+                    if (this.languages[i].locale === this.$i18n.locale) {
+                        return this.languages[i];
+                    }
+                }
+
+                return this.languages[0];
             }
         },
         methods: {
+            changeLanguage(lang) {
+                this.$i18n.locale = lang;
+            },
             capitalizeFirstLetter(string) {
                 return string.charAt(0).toUpperCase() + string.slice(1);
             },

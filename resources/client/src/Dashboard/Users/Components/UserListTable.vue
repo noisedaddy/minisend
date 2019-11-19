@@ -30,13 +30,13 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-6">
-                    <h3 class="mb-0">Users</h3>
+                    <h3 class="mb-0">{{$t('users')}}</h3>
                 </div>
                 <div class="col-6 text-right">
                     <router-link to="/dashboard/users/create">
                         <base-button icon type="primary" size="sm">
                             <span class="btn-inner--icon"><i class="fas fa-user-plus"></i></span>
-                            <span class="btn-inner--text">New User</span>
+                            <span class="btn-inner--text">{{$t('newUser')}}</span>
                         </base-button>
                     </router-link>
                 </div>
@@ -96,7 +96,7 @@
                     </el-dropdown>
                 </template>
             </el-table-column>
- 
+
         </el-table>
         <div
             slot="footer"
@@ -126,10 +126,10 @@
 <script>
     import { mapGetters, mapActions } from "vuex";
     import {
-        Table, 
+        Table,
         TableColumn,
         DropdownMenu,
-        DropdownItem, 
+        DropdownItem,
         Dropdown
     } from 'element-ui'
     import usersPaginationMixin from './usersPaginationMixin'

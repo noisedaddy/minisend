@@ -7,10 +7,8 @@
         <div v-if="!loading" class="main-content">
             <dashboard-navbar type="light" class="mb-30px"></dashboard-navbar>
 
-            <fade-transition :duration="100" origin="center top" mode="out-in">
-                <!-- your content here -->
-                <router-view></router-view>
-            </fade-transition>
+
+            <router-view></router-view>
 
             <dashboard-footer v-if="!$route.meta.hideFooter"></dashboard-footer>
         </div>
@@ -39,7 +37,6 @@
 
     import DashboardNavbar from './DashboardNavbar.vue';
     import DashboardFooter from './DashboardFooter.vue';
-    import {FadeTransition} from 'vue2-transitions';
     import BaseLoading from "@shared/BaseLoading";
     import UsersAPI from "@services/api/UsersAPI";
 
@@ -56,7 +53,6 @@
             BaseLoading,
             DashboardNavbar,
             DashboardFooter,
-            FadeTransition
         },
         data() {
             return {

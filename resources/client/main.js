@@ -2,8 +2,9 @@ import Vue from 'vue';
 import ArgonTheme from './argon/plugins/dashboard-plugin';
 import store from './store'
 import router from './router/router';
+import i18n from "./i18n/i18n";
 import App from './App.vue';
-import {Select, Option} from 'element-ui'
+import {Select, Option} from 'element-ui';
 import "./app.scss";
 
 window._ = require('lodash');
@@ -20,5 +21,6 @@ new Vue({
     el: '#app',
     store,
     router,
+    i18n,
     render: (h) => h(App),
 });
