@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Users\UpdateUser;
 use App\Http\Requests\Users\CreateUser;
 use App\Http\Resources\User;
 use App\Repositories\Users\UsersRepo;
 use App\Http\Resources\User as UserResource;
+use Illuminate\Support\Facades\Request;
 
 class UsersController extends Controller
 {
@@ -67,9 +69,9 @@ class UsersController extends Controller
      * @return UserResource
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function update(\Request $request, \App\Models\User $user)
+    public function update(UpdateUser $request, \App\Models\User $user)
     {
-        $user->update($request->only(['first_name', 'last_name', 'email']));
+        $this->usersRepo->update($request->toArray(), $user);
         return new UserResource($user);
     }
 
@@ -81,9 +83,9 @@ class UsersController extends Controller
      * @throws \Exception
      */
 
-    public function delete(\App\Models\User $user)
+    public function destroy(\App\Models\User $user)
     {
-        $user->delete();
+        $this->usersRepo->delete($user);
         return response()->json(null, 204);
     }
 

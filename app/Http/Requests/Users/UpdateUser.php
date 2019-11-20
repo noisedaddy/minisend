@@ -3,10 +3,10 @@
 namespace App\Http\Requests\Users;
 
 use App\Http\Requests\BaseRequest;
+use Illuminate\Foundation\Http\FormRequest;
 
-class CreateUser extends BaseRequest
+class UpdateUser extends BaseRequest
 {
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -16,6 +16,7 @@ class CreateUser extends BaseRequest
     {
         return true;
     }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -23,16 +24,14 @@ class CreateUser extends BaseRequest
      */
     public function rules()
     {
-
-
         return [
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required',
             'account_id' => '',
-            'password' => 'required|min:5|max:100|confirmed',
-            'password_confirmation' => 'required',
-//             'image' => 'required|mimes:jpeg,png,jpg,gif,svg',
+//            'password' => 'required|min:5|max:100|confirmed',
+//            'password_confirmation' => 'required',
+//            'image' => 'required|mimes:jpeg,png,jpg,gif,svg',
         ];
     }
 
@@ -49,4 +48,5 @@ class CreateUser extends BaseRequest
             'password' => 'password'
         ];
     }
+
 }
