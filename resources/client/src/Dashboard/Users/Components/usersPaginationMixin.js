@@ -1,8 +1,5 @@
 export default {
   computed: {
-    queriedData() {
-      return this.users.slice(this.from, this.to);
-    },
     to() {
       let highBound = this.from + this.pagination.perPage;
       if (this.total < highBound) {
@@ -26,24 +23,6 @@ export default {
         total: 0
       },
       searchQuery: '',
-    }
-  },
-  methods: {
-    sortChange({ prop, order }) {
-      if (prop) {
-        this.users.sort((a, b) => {
-          let aVal = a[prop]
-          let bVal = b[prop]
-          if (order === 'ascending') {
-            return aVal > bVal ? 1 : -1
-          }
-          return bVal - aVal ? 1 : -1
-        })
-      } else {
-        this.users.sort((a, b) => {
-          return a.id - b.id
-        })
-      }
     }
   },
 }

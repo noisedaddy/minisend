@@ -46,8 +46,7 @@
             class="table-responsive table-flush"
             header-row-class-name="thead-light"
             row-key="id"
-            :data="queriedData"
-            @sort-change="sortChange"
+            :data="users"
             @selection-change="selectionChange">
             <el-table-column type="selection"
                             min-width="120px">
@@ -100,7 +99,7 @@
         </el-table>
         <div
             slot="footer"
-            class="col-12 d-flex justify-content-center justify-content-sm-between flex-wrap"
+            class="col-12 mt-3 d-flex justify-content-center justify-content-sm-between flex-wrap"
           >
             <div class="">
               <p class="card-category">
@@ -124,7 +123,6 @@
 </template>
 
 <script>
-    import { mapGetters, mapActions } from "vuex";
     import {
         Table,
         TableColumn,
@@ -133,6 +131,7 @@
         Dropdown
     } from 'element-ui'
     import usersPaginationMixin from './usersPaginationMixin'
+    import UsersAPI from '../../../../services/api/UsersAPI'
 
     export default {
         name: "UserListTable",
@@ -146,24 +145,21 @@
         },
         data() {
             return {
+                users: [],
                 selectedRows: [],
             }
-        },
-        computed: {
-            ...mapGetters({
-                users: 'users/users',
-            })
         },
         mounted() {
             this.fetchUsers();
         },
         methods: {
-            ...mapActions({
-                fetchUsers: 'users/fetchUsers',
-            }),
             selectionChange(selectedRows) {
                 this.selectedRows = selectedRows
-            }
+            },
+            async fetchUsers() {
+                const data = await UsersAPI.getAll();
+                this.users = data;
+            },
         }
     }
 </script>

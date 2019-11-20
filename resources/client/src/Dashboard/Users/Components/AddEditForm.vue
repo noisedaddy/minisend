@@ -5,7 +5,7 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-8">
+                <div class="col-md-8">
                     <form>
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label form-control-label">First Name</label>
@@ -59,11 +59,14 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-4 text-center">
+                <div class="col-md-4 text-center">
                     <file-input v-model="fileSingle" id="avatar-upload"></file-input>
                     <label for="avatar-upload" class="mt-2"> JPG or PNG; max: 1MB</label>
                 </div>
             </div>
+        </div>
+        <div class="card-footer">
+            <button type="button" class="btn btn-primary mb-3">Create User</button>
         </div>
     </div>
 </template>
