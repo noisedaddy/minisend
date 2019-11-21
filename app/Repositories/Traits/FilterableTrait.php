@@ -15,7 +15,6 @@ trait FilterableTrait {
     public function filterQuery($url, $model){
 
         $query = QueryBuilder::for($model);
-        info($url);
 
         foreach($url as $key => $value)
         {
