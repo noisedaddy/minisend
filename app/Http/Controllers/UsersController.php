@@ -18,9 +18,9 @@ class UsersController extends Controller
         $this->usersRepo = $usersRepo;
     }
 
-    public function index()
-    {
-        return UserResource::collection($this->usersRepo->all());
+    public function index() {
+        $url = Request::all();
+        return UserResource::collection($this->usersRepo->all($url));
     }
 
     public function show($id)
