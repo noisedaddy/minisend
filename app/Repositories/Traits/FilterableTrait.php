@@ -21,40 +21,40 @@ trait FilterableTrait {
             switch(strtolower($key))
             {
                 case 'filter':
-                    if (is_array($url['filter']))
-                        $query->allowedFilters(array_keys($url['filter']));
+                    if (is_array($url[$key]))
+                        $query->allowedFilters(array_keys($url[$key]));
                     else
-                        $query->allowedFilters($url['filter']);
+                        $query->allowedFilters($url[$key]);
 
                     break;
                 case 'include':
-                    if (is_array($url['include']))
-                        $query->allowedIncludes(array_keys($url['include']));
+                    if (is_array($url[$key]))
+                        $query->allowedIncludes(array_keys($url[$key]));
                     else
-                        $query->allowedIncludes($url['include']);
+                        $query->allowedIncludes($url[$key]);
 
                     break;
                 case 'sort':
-                    if (is_array($url['sort']))
-                        $query->allowedSorts(array_keys($url['sort']));
+                    if (is_array($url[$key]))
+                        $query->allowedSorts(array_keys($url[$key]));
                     else
-                        $query->allowedSorts($url['sort']);
+                        $query->allowedSorts($url[$key]);
                     break;
                 case 'fields':
-                    if (is_array($url['fields']))
-                        $query->allowedFields(array_keys($url['fields']));
+                    if (is_array($url[$key]))
+                        $query->allowedFields(array_keys($url[$key]));
                     else
-                        $query->allowedFields($url['fields']);
+                        $query->allowedFields($url[$key]);
 
                     break;
                 case 'append':
-                    if (is_array($url['append']))
-                        $query->allowedAppends(array_keys($url['append']));
+                    if (is_array($url[$key]))
+                        $query->allowedAppends(array_keys($url[$key]));
                     else
-                        $query->allowedAppends($url['append']);
+                        $query->allowedAppends($url[$key]);
                     break;
                 case 'count':
-                    $query->paginate($url['count']);
+                    $query->paginate($url[$key]);
                     break;
                 default:
                     $query->get();
@@ -67,6 +67,12 @@ trait FilterableTrait {
 
     }
 
+    /**
+     * depracated, used for testing
+     * @param $url
+     * @param $query
+     * @return mixed
+     */
     public function filterQuery2($url, $query){
 
         foreach($url as $key => $value) {
