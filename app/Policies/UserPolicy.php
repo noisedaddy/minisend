@@ -17,7 +17,7 @@ class UserPolicy
      */
     public function viewAny(User $user)
     {
-        if ($user->isSuperAdmin() || $user->isCompanyAdmin()) {
+        if ($user->isSuperAdmin() || $user->isAccountAdmin()) {
             return true;
         } else {
             return false;
@@ -37,7 +37,7 @@ class UserPolicy
             return true;
         }
 
-        if ($user->isCompanyAdmin()) {
+        if ($user->isAccountAdmin()) {
             if ($user->account_id === $model->account_id) {
                 return true;
             } else {
@@ -56,7 +56,7 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        if ($user->isCompanyAdmin()) {
+        if ($user->isAccountAdmin()) {
             return true;
         } else {
             return false;

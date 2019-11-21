@@ -52,7 +52,7 @@ class UsersController extends Controller
             return $this->forbidden();
         }
 
-        if ($user->isCompanyAdmin()) {
+        if ($user->isAccountAdmin()) {
             $data['account_id'] = $user['account_id'];
         }
 

@@ -14,20 +14,18 @@ class CreateCandidatesTable extends Migration
     public function up()
     {
         Schema::create('candidates', function (Blueprint $table) {
-
             $table->bigIncrements('id');
-            $table->integer('user_id')->unsigned()->index();
-            $table->integer('added_by')->unsigned()->index();
-            $table->string('category')->nullable();
+            $table->integer('added_by_user_id')->unsigned()->index();
+            $table->integer('company_id')->unsigned()->index();
+            $table->integer('division_id')->unsigned()->index()->nullable();
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('nickname')->nullable();
             $table->string('email');
             $table->string('phone_number')->nullable();
             $table->string('address')->nullable();
             $table->string('avatar')->nullable();
             $table->string('skype')->nullable();
-//            $table->integer('kering_id')->unsigned()->nullable()->index();
+            $table->text('meta')->nullable();
             $table->softDeletes();
             $table->timestamps();
 

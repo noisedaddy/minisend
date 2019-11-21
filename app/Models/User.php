@@ -19,18 +19,20 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $fillable = [
         'account_id',
-        'email',
+        'role',
         'first_name',
         'last_name',
+        'email',
         'password',
-        'role',
         'phone_number',
         'address',
+        'avatar',
         'position',
         'email_notifications',
         'last_login',
         'first_login',
-        'timezone'
+        'timezone',
+        'meta',
     ];
 
     /**
@@ -39,7 +41,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'meta'
     ];
 
     /**
@@ -51,6 +53,17 @@ class User extends Authenticatable implements JWTSubject
         'last_login' => 'datetime',
         'first_login' => 'datetime',
     ];
+
+    public function account()
+    {
+        return $this->belongsTo(Account::class, 'account_id', 'id');
+    }
+
+    public function companies()
+    {
+        return $this->belongsToMany(Company::class, 'user_company', 'company_id', 'user_id');
+    }
+
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
@@ -60,7 +73,7 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->getKey();
     }
-
+    
     /**
      * Return a key value array, containing any custom claims to be added to the JWT.
      *
@@ -71,19 +84,23 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function isSuperAdmin() {
+    public function isSuperAdmin()
+    {
         return $this->role === UserRole::SUPER_ADMIN;
     }
 
-    public function isCompanyAdmin() {
+    public function isAccountAdmin()
+    {
         return $this->role === UserRole::ACCOUNT_ADMIN;
     }
 
-    public function isCompanyManager() {
+    public function isAccountManager()
+    {
         return $this->role === UserRole::ACCOUNT_MANAGER;
     }
 
-    public function isEvaluator() {
+    public function isEvaluator()
+    {
         return $this->role === UserRole::EVALUATOR;
     }
 }
