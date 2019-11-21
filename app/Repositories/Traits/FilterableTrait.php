@@ -53,8 +53,8 @@ trait FilterableTrait {
                     else
                         $query->allowedAppends($url['append']);
                     break;
-                case 'page':
-                    echo false;
+                case 'count':
+                    $query->paginate($url['count']);
                     break;
                 default:
                     $query->get();
