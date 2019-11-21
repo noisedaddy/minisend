@@ -68,20 +68,20 @@
             </el-table-column>
             <el-table-column label="Email"
                              prop="email"
-                             min-width="140px"
+                             min-width="200px"
                              sortable>
             </el-table-column>
-            <!-- <el-table-column label="Last login"
+            <el-table-column label="Last login"
                              prop="last_login"
-                             min-width="180px"
+                             min-width="120px"
                              sortable>
             </el-table-column>
             <el-table-column label="Entered"
-                             prop="entered"
-                             min-width="180px"
+                             prop="first_login"
+                             min-width="120px"
                              sortable>
-            </el-table-column> -->
-            <el-table-column min-width="50px" align="right">
+            </el-table-column>
+            <el-table-column align="center">
                 <template v-slot="{row}">
                     <el-dropdown trigger="click" class="dropdown">
                     <span class="btn btn-sm btn-icon-only">
