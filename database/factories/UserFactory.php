@@ -25,10 +25,14 @@ $factory->define(User::class, function (Faker $faker) {
         $accountId = rand(1,5);
     }
 
+    $firstName = $faker->firstName;
+    $lastName = $faker->lastName;
+
     return [
         'account_id' => $accountId,
-        'first_name' => $faker->firstName,
-        'last_name' => $faker->lastName,
+        'first_name' => $firstName,
+        'last_name' => $lastName,
+        'full_name' => $firstName . " " . $lastName,
         'email' => $faker->unique()->safeEmail,
         'role' => $role,
         'phone_number' => $faker->phoneNumber,
