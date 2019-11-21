@@ -2,12 +2,19 @@
 
 namespace App\Repositories\Traits;
 
-use App\Models\User;
 use Spatie\QueryBuilder\QueryBuilder;
 
 trait FilterableTrait {
 
-    public function filterQuery($url, $query){
+    /**
+     * Sanitize and filter given api url with given model
+     * @param $url
+     * @param $model
+     * @return \Illuminate\Database\Eloquent\Collection|QueryBuilder|QueryBuilder[]
+     */
+    public function filterQuery($url, $model){
+
+        $query = QueryBuilder::for($model);
 
         foreach($url as $key => $value)
         {

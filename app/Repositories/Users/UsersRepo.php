@@ -4,7 +4,6 @@ namespace App\Repositories\Users;
 
 use App\Models\User;
 use App\Support\Enums\UserRole;
-use Spatie\QueryBuilder\QueryBuilder;
 use App\Repositories\Traits\FilterableTrait;
 
 class UsersRepo implements UsersInterface {
@@ -24,8 +23,7 @@ class UsersRepo implements UsersInterface {
      */
     public function all(array $url = []){
 
-        $query = QueryBuilder::for(User::class);
-        return $this->filterQuery($url, $query);
+        return $this->filterQuery($url, User::class);
 
     }
 
