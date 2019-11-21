@@ -15,6 +15,7 @@ trait FilterableTrait {
     public function filterQuery($url, $model){
 
         $query = QueryBuilder::for($model);
+        info($url);
 
         foreach($url as $key => $value)
         {
@@ -53,17 +54,12 @@ trait FilterableTrait {
                     else
                         $query->allowedAppends($url[$key]);
                     break;
-                case 'count':
-                    $query->paginate($url[$key]);
-                    break;
-                default:
-                    $query->get();
             }
 
 
         }
 
-        return $query->get();
+        return $query;
 
     }
 

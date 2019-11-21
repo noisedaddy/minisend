@@ -11,21 +11,16 @@ class UsersRepo implements UsersInterface {
 
     use FilterableTrait;
 
-    /**
-     * Get all users.
-     * search - string, search within user first name, last name and email
-     * role - integer list eg. role=1,2,4 means show only users who have role Super Admin or Account Admin or Evaluator
-     * order - signifies order by column (e.g. order=+name means order by name ascending)
-     * account_id
-     * page - current paginated page
-     * ?page=5&search[name]=john,mike&account_id=4,role=3&order=acs
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|QueryBuilder|QueryBuilder[]
-     */
-    public function all(array $url = []){
+    public function getAllowedQueryFor(User $user)
+    {
+        $q = User::query();
 
-        return $this->filterQuery($url, User::class);
+        if ($user->isAccountAdmin()) {
+            $q->where('account_id', $user->account_id);
+            $q->whereIn('role', [UserRole::ACCOUNT_ADMIN, UserRole::ACCOUNT_MANAGER]);
+        }
 
+        return $q;
     }
 
     /**
@@ -35,7 +30,7 @@ class UsersRepo implements UsersInterface {
      */
     public function find($id)
     {
-        return QueryBuilder::for(User::class)->where('id', $id)->first();
+        return User::where('id', $id)->first();
     }
 
     /**

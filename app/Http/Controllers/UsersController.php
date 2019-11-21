@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Users\UpdateUser;
 use App\Http\Requests\Users\CreateUser;
-use App\Http\Resources\User;
+use App\Models\User;
 use App\Repositories\Users\UsersRepo;
 use App\Http\Resources\User as UserResource;
 use Illuminate\Support\Facades\Request;
@@ -18,9 +18,28 @@ class UsersController extends Controller
         $this->usersRepo = $usersRepo;
     }
 
-    public function index() {
+    /**
+     * Get paginated users.
+     * search - string, search within user first name, last name and email
+     * role - integer list eg. role=1,2,4 means show only users who have role Super Admin or Account Admin or Evaluator
+     * order - signifies order by column (e.g. order=+name means order by name ascending)
+     * account_id
+     * page - current paginated page
+     * ?page=5&search[name]=john,mike&account_id=4,role=3&order=acs
+     */
+    public function index()
+    {
+        $user = auth()->user();
+
+        if (!$user->can('viewAny', User::class)) {
+            return $this->forbidden();
+        }
+
         $url = Request::all();
-        return UserResource::collection($this->usersRepo->all($url));
+        $query = $this->usersRepo->getAllowedQueryFor($user);
+        $data = $this->usersRepo->filterQuery($url, $query)->paginate();
+
+        return UserResource::collection($data);
     }
 
     public function show($id)

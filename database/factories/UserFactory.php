@@ -17,11 +17,20 @@ use Illuminate\Support\Str;
 */
 
 $factory->define(User::class, function (Faker $faker) {
+
+    $role = rand(1, 4);
+    $accountId = null;
+
+    if ($role === 2 || $role === 3) {
+        $accountId = rand(1,5);
+    }
+
     return [
+        'account_id' => $accountId,
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
         'email' => $faker->unique()->safeEmail,
-        'role' => rand(\App\Support\Enums\UserRole::SUPER_ADMIN, \App\Support\Enums\UserRole::EVALUATOR),
+        'role' => $role,
         'phone_number' => $faker->phoneNumber,
         'address' => $faker->address,
         'position' => $faker->jobTitle,

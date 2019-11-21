@@ -4,7 +4,6 @@ namespace App\Repositories\Users;
 
 interface UsersInterface
 {
-    public function all();
 
     public function find($id);
 
