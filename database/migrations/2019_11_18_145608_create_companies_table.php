@@ -21,7 +21,6 @@ class CreateCompaniesTable extends Migration {
             $table->string('website')->nullable();
             $table->string('facebook')->nullable();
             $table->string('twitter')->nullable();
-            $table->string('google_plus')->nullable();
             $table->string('linkedin')->nullable();
             $table->string('instagram')->nullable();
             $table->text('meta')->nullable();

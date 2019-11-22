@@ -17,7 +17,6 @@ class Company extends Model
         'website',
         'facebook',
         'twitter',
-        'google_plus',
         'linkedin',
         'instagram',
         'meta',
@@ -32,7 +31,7 @@ class Company extends Model
         return $this->hasMany(Division::class, 'company_id', 'id');
     }
 
-    public function users()
+    public function managers()
     {
         return $this->belongsToMany(User::class, 'user_company', 'user_id', 'company_id');
     }

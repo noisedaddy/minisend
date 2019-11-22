@@ -12,14 +12,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         factory(\App\Models\User::class, 1)->create([
-            'email' => 'admin@admin.com',
+            'email'    => 'admin@admin.com',
             'password' => bcrypt('123123'),
-            'role' => \App\Support\Enums\UserRole::SUPER_ADMIN
+            'role'     => \App\Support\Enums\UserRole::SUPER_ADMIN
         ]);
 
-        factory(\App\Models\User::class, 100)->create()->each(function ($user) {
-            $user->save();
-        });
 
+        $this->call(SampleDataSeeder::class);
     }
 }

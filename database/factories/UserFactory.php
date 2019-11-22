@@ -17,24 +17,16 @@ use Illuminate\Support\Str;
 */
 
 $factory->define(User::class, function (Faker $faker) {
-
-    $role = rand(1, 4);
-    $accountId = null;
-
-    if ($role === 2 || $role === 3) {
-        $accountId = rand(1,5);
-    }
-
     $firstName = $faker->firstName;
     $lastName = $faker->lastName;
 
     return [
-        'account_id' => $accountId,
+        'account_id' => null,
         'first_name' => $firstName,
         'last_name' => $lastName,
         'full_name' => $firstName . " " . $lastName,
         'email' => $faker->unique()->safeEmail,
-        'role' => $role,
+        'role' => rand(1,4),
         'phone_number' => $faker->phoneNumber,
         'address' => $faker->address,
         'position' => $faker->jobTitle,

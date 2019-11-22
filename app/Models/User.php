@@ -60,6 +60,9 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsTo(Account::class, 'account_id', 'id');
     }
 
+    /**
+     * only account managers belong to companies
+     */
     public function companies()
     {
         return $this->belongsToMany(Company::class, 'user_company', 'company_id', 'user_id');
