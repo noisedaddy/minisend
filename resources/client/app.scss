@@ -17,6 +17,7 @@ $nav-pills-link-active-bg: $otestPrimary !default;
 }
 
 
+@import "~element-ui/lib/theme-chalk/icon.css";
 @import '~element-ui/lib/theme-chalk/select.css';
 @import '~element-ui/lib/theme-chalk/select-dropdown.css';
 @import '~element-ui/lib/theme-chalk/table.css';
@@ -45,11 +46,10 @@ $nav-pills-link-active-bg: $otestPrimary !default;
         font-weight: bold;
         padding: 1rem 0 0.5rem;
         border-bottom: 0.5rem solid transparent;
-        transition: background, border-color, 0.5s;
     }
 
     ul li i {
-        transition: color, 0.5s;
+
     }
 }
 
@@ -92,4 +92,17 @@ $nav-pills-link-active-bg: $otestPrimary !default;
 
 .min-width-auto {
     min-width: auto;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.activeTableRow {
+    background: $default !important;
+    color: $white !important;
+}
+
+.activeTableRow td {
+    color: $white !important;
 }

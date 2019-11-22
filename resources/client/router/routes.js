@@ -6,6 +6,7 @@ import DashboardLayout from "@src/Dashboard/DashboardLayout";
 import OverviewIndex from "@src/Dashboard/Overview/Index";
 import UsersIndex from "@src/Dashboard/Users/List/Index"
 import UsersCreate from "@src/Dashboard/Users/Create/Index"
+import UsersEdit from "@src/Dashboard/Users/Edit/Index"
 
 export default [
     {path: '/', component: Home},
@@ -47,19 +48,29 @@ export default [
              * USERS
              */
             {
-                path: 'users/list',
+                path: 'users',
                 component: UsersIndex,
                 meta: {
                     title: "Users",
-                }
+                },
+                children: [
+                    {
+                        path: 'create',
+                        component: UsersCreate,
+                        meta: {
+                            title: "Create a user",
+                        }
+                    },
+                    {
+                        path: ':userId',
+                        component: UsersEdit,
+                        meta: {
+                            title: "Edit user",
+                        }
+                    }
+                ]
             },
-            {
-                path: 'users/create',
-                component: UsersCreate,
-                meta: {
-                    title: "Create a user",
-                }
-            }
+
         ],
     },
     {path: '*', component: NotFound}

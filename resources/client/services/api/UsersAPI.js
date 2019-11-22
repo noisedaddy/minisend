@@ -15,13 +15,16 @@ const UsersAPI = {
         return API
             .get('users')
             .then((res) => {
-                const users = res.data.data;
-                return users.map((user) => {
+                let users = res.data.data;
+                users = users.map((user) => {
                     user.first_login = moment('2018-07-12 09:00:00', 'YYYY-MM-DD HH:mm:ss').tz(user.timezone).format();
                     user.last_login = moment('2018-07-17 19:00:00', 'YYYY-MM-DD HH:mm:ss').tz(user.timezone).format();
                     user.display_name = `${user.first_name} ${user.last_name}`;
                     return user;
-                })
+                });
+
+                res.data.data = users;
+                return res.data;
             })
     }
 };

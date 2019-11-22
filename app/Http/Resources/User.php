@@ -25,7 +25,8 @@ class User extends JsonResource
             'timezone' => $this->timezone,
             'last_login' => $this->last_login,
             'first_login' => $this->first_login,
-            'avatar' => $this->avatar ? public_path('user_media/' . $this->avatar) : null
+            'avatar' => $this->avatar ? public_path('user_media/' . $this->avatar) : null,
+            'account' => $this->account ? $this->account : null,
         ];
     }
 }

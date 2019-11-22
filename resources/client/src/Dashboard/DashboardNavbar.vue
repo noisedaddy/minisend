@@ -275,7 +275,7 @@
                     <li class="nav-item"
                         :class="{'active' : $route.path.indexOf('dashboard/users') > -1}"
                     >
-                        <router-link to="/dashboard/users/list" class="nav-link">
+                        <router-link to="/dashboard/users" class="nav-link">
                             <i class="fas fa-user-tie"></i> {{ $t('users') }}
                         </router-link>
                     </li>
