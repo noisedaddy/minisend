@@ -46,6 +46,9 @@ return [
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
+            'upload_file_max_size' => env('UPLOAD_FILE_MAX_SIZE', '2M'),
+            'ws_storage_size_limit' => env('WS_STORAGE_SIZE_LIMIT', '5M'),
+            'allowed_files' => ['jpg', 'jpeg', 'png']
         ],
 
         'public' => [
@@ -62,6 +65,8 @@ return [
             'region' => env('AWS_DEFAULT_REGION'),
             'bucket' => env('AWS_BUCKET'),
             'url' => env('AWS_URL'),
+            'upload_file_max_size' => env('UPLOAD_FILE_MAX_SIZE', '2M'),
+            'ws_storage_size_limit' => env('WS_STORAGE_SIZE_LIMIT', '5M'),
         ],
 
     ],

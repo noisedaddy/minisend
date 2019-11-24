@@ -10,8 +10,8 @@ namespace App\Services\File;
 
 
 /**
- * Class FileEncodeUtils
- * @package App\Library\Helpers
+ * Class FileEncodeUtils for file manipulation
+ * @package App\Services\File
  */
 class FileEncodeUtils
 {
