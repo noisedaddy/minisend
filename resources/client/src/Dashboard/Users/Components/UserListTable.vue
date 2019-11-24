@@ -82,16 +82,6 @@
             [DropdownMenu.name]: DropdownMenu,
             BaseServerSidePagination,
         },
-        props: {
-            users: {
-                type: Array,
-                required: true
-            },
-            meta: {
-                type: Object,
-                required: true
-            }
-        },
         data() {
             return {
                 users: [],
