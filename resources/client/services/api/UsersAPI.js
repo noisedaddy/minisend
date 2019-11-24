@@ -11,19 +11,16 @@ const UsersAPI = {
                 return res.data.data;
             })
     },
-    getAll() {
+    getAll(endpt = 'users') {
         return API
-            .get('users')
+            .get(endpt)
             .then((res) => {
-                let users = res.data.data;
-                users = users.map((user) => {
-                    user.first_login = moment('2018-07-12 09:00:00', 'YYYY-MM-DD HH:mm:ss').tz(user.timezone).format();
-                    user.last_login = moment('2018-07-17 19:00:00', 'YYYY-MM-DD HH:mm:ss').tz(user.timezone).format();
-                    user.display_name = `${user.first_name} ${user.last_name}`;
+                res.data.data = res.data.data.map((user) => {
+                    user.first_login = user.first_login ? moment(user.first_login, 'YYYY-MM-DD HH:mm:ss').tz(user.timezone).format() : null;
+                    user.last_login = user.first_login ? moment(user.last_login, 'YYYY-MM-DD HH:mm:ss').tz(user.timezone).format() : null;
                     return user;
-                });
+                })
 
-                res.data.data = users;
                 return res.data;
             })
     }

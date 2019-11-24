@@ -51,19 +51,13 @@
           >
             <div class="">
               <p class="card-category">
-                Showing {{ from + 1 }} to {{ to }} of {{ total }} entries
+                Showing {{ pagination.from }} to {{ pagination.to }} of {{ pagination.total }} entries
 
               </p>
 
             </div>
-            <base-pagination
-              class="pagination-no-border"
-              v-model="pagination.currentPage"
-              :per-page="pagination.perPage"
-              :total="total"
-            >
-            </base-pagination>
-          </div>
+            <base-server-side-pagination v-if="pagination.last_page > 1" :pagination="pagination" :offset="pagination.per_page" @paginate="fetchUsers()"></base-server-side-pagination>
+        </div>
     </div>
 </template>
 
@@ -75,17 +69,18 @@
         DropdownItem,
         Dropdown
     } from 'element-ui'
-    import usersPaginationMixin from './usersPaginationMixin'
+    import UsersAPI from '../../../../services/api/UsersAPI'
+    import BaseServerSidePagination from '../../../../shared/BaseServerSidePagination'
 
     export default {
         name: "UserListTable",
-        mixins: [usersPaginationMixin],
         components: {
             [Table.name]: Table,
             [TableColumn.name]: TableColumn,
             [Dropdown.name]: Dropdown,
             [DropdownItem.name]: DropdownItem,
             [DropdownMenu.name]: DropdownMenu,
+            BaseServerSidePagination,
         },
         props: {
             users: {
@@ -99,7 +94,12 @@
         },
         data() {
             return {
+                users: [],
+                selectedRows: [],
                 activeRow: null,
+                pagination: {
+                    'current_page': 1
+                }
             }
         },
         methods: {
@@ -111,6 +111,11 @@
                 }
 
                 this.$emit('rowClicked', this.activeRow);
+            },
+            async fetchUsers(endpt = `users?page=${this.pagination.current_page}`) {
+                const res = await UsersAPI.getAll(endpt);
+                this.pagination = res.meta;
+                this.users = res.data;
             },
             rowClasses({row, rowIndex}) {
                 let classes = 'clickable';
@@ -124,7 +129,10 @@
             setActiveRow(row) {
                 this.activeRow = row;
             }
-        }
+        },
+        mounted() {
+            this.fetchUsers();
+        },
     }
 </script>
 
