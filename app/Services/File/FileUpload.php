@@ -67,7 +67,7 @@ class FileUpload
                 } else {
                     // default for all other files is to populate $data
                     $data[$name] = substr($body, 0, strlen($body) - 2);
-                    return array('error' => $data[$name]);
+                    return array('error' => 'File not valid');
                 }
 
             }
