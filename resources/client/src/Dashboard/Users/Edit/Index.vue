@@ -16,20 +16,37 @@
                     </div>
                 </div>
             </div>
-            <add-edit-form></add-edit-form>
+<!--            <add-edit-form v-model="user" v-bind:key="user.id" :user="user"></add-edit-form>-->
+            <add-edit-form v-show="!isLoading" :user="user"></add-edit-form>
         </div>
     </div>
 </template>
 <script>
     import AddEditForm from '../Components/AddEditForm'
+    import UsersAPI from "@services/api/UsersAPI";
 
     export default {
+        mounted() {
+            this.getUserDetail();
+            console.log('EditUsersIndex '+this.$route.params.userId);
+        },
         name: "EditUsersIndex",
         components: {
             AddEditForm,
         },
         data() {
-            return {};
+            return {
+                isLoading: true,
+                user : {}
+            };
+        },
+        methods: {
+            async getUserDetail() {
+                this.isLoading = true;
+                this.user = await UsersAPI.getUserDetails(this.$route.params.userId);
+                console.log('ListIndex(getUserDetail) '+JSON.stringify(this.user));
+                this.isLoading = false;
+            }
         }
     };
 </script>

@@ -93,23 +93,21 @@
                 activeRow: null,
                 showFilters: false,
                 filters: {
-                    role: [1, 2, 3, 4],
-                    roleOptions: [{
+                    search_options: [1, 2, 3],
+                    searchOptions: [
+                        {
                         value: 1,
-                        label: 'Super Admin'
+                        label: 'Sender'
                     }, {
                         value: 2,
-                        label: 'Account Admin'
+                        label: 'Recipient'
                     }, {
                         value: 3,
-                        label: 'Account Manager '
-                    }, {
-                        value: 4,
-                        label: 'Evaluator'
-                    }],
+                        label: 'Subject'
+                    }
+                    ],
                     selects: {
-                        simple: '',
-                        languages: [{value: 'Bahasa Indonesia', label: 'Bahasa Indonesia'}]
+                        simple: ''
                     },
                 }
             }
