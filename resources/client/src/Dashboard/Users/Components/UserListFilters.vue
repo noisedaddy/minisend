@@ -54,9 +54,9 @@
         },
         methods: {
             searchStart() {
-                // alert(this.search_phrase);
+                console.log(this.value);
                 UsersAPI
-                    .search(this.search_phrase)
+                    .search(this.search_phrase,this.value)
                     .then((data) => {
                         console.log(data);
                         this.$router.push('/dashboard/overview');

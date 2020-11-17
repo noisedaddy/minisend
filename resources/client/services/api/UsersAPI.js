@@ -42,10 +42,11 @@ const UsersAPI = {
                 return res;
             })
     },
-    search(search_phrase) {
+    search(search_phrase, values) {
         return API
             .post('users/search', {
-                search_phrase
+                search_phrase,
+                values
             })
             .then((res) => {
                 console.log(res);

@@ -93,16 +93,16 @@
                 activeRow: null,
                 showFilters: false,
                 filters: {
-                    role: [1, 2, 3],
+                    role: ['sender', 'recipient', 'subject'],
                     roleOptions: [
                         {
-                        value: 1,
+                        value: 'sender',
                         label: 'Sender'
                     }, {
-                        value: 2,
+                        value: 'recipient',
                         label: 'Recipient'
                     }, {
-                        value: 3,
+                        value: 'subject',
                         label: 'Subject'
                     }
                     ],

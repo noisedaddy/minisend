@@ -62,6 +62,13 @@ class UsersRepo implements UsersInterface {
     public function search(array $data)
     {
         $search = $data['search_phrase'];
+        $searchOptions = $data['values']['role'];
+
+        if (is_array($searchOptions) && !empty($searchOptions))
+            dd($searchOptions);
+        else
+            dd('empty');
+
         return User::where('first_name', 'LIKE', '%' . $search . '%')->orWhere('last_name', 'LIKE', '%' . $search . '%')->orWhere('email', 'LIKE', '%' . $search . '%')->get();
     }
 
