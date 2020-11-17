@@ -42,6 +42,16 @@ const UsersAPI = {
                 return res;
             })
     },
+    search(search_phrase) {
+        return API
+            .post('users/search', {
+                search_phrase
+            })
+            .then((res) => {
+                console.log(res);
+                return res;
+            })
+    },
 };
 
 export default UsersAPI;

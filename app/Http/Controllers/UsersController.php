@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Users\Search;
 use App\Http\Requests\Users\UpdateUser;
 use App\Http\Requests\Users\CreateUser;
 use App\Models\User;
@@ -112,6 +113,15 @@ class UsersController extends Controller
             return $this->errorResponse($file['error']);
         }
 
+    }
+
+    /**
+     * Search
+     * @param Request $request
+     * @return array
+     */
+    public function search(Search $request){
+        return $this->usersRepo->search($request->toArray());
     }
 
 }

@@ -4,6 +4,7 @@ namespace App\Repositories\Users;
 
 use App\Models\User;
 use App\Support\Enums\UserRole;
+use Illuminate\Support\Facades\DB;
 use Spatie\QueryBuilder\QueryBuilder;
 use App\Repositories\Traits\FilterableTrait;
 
@@ -56,6 +57,12 @@ class UsersRepo implements UsersInterface {
 
     public function show($id){
 
+    }
+
+    public function search(array $data)
+    {
+        $search = $data['search_phrase'];
+        return User::where('first_name', 'LIKE', '%' . $search . '%')->orWhere('last_name', 'LIKE', '%' . $search . '%')->orWhere('email', 'LIKE', '%' . $search . '%')->get();
     }
 
 }

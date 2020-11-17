@@ -14,4 +14,6 @@ interface UsersInterface
     public function delete($id);
 
     public function show($id);
+
+    public function search(array $data);
 }

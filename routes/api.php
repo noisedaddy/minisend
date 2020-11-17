@@ -6,7 +6,8 @@ Route::post('login', 'Auth\LoginController@Login')->name('login');
 
 Route::middleware('auth:api')->group(function () {
     Route::put('/users/{id}/avatar', 'UsersController@uploadAvatar');
+    Route::post('/users/search', 'UsersController@search');
     Route::apiResource('users', 'UsersController');
 
-    Route::apiResource('companies', 'CompaniesController');
+//    Route::apiResource('companies', 'CompaniesController');
 });

@@ -22,7 +22,7 @@
                     </base-input>
                 </div>
                 <div class="row mt-3">
-                    <base-input class="col-12" label="Search">
+                    <base-input class="col-12" label="Search" v-model="search_phrase">
                     </base-input>
                 </div>
                 <div class="form-group row">
@@ -37,6 +37,8 @@
     </div>
 </template>
 <script>
+    import UsersAPI from "@services/api/UsersAPI";
+
     export default {
         name: 'UserListFilters',
         props: {
@@ -47,11 +49,21 @@
         },
         data() {
             return {
-
+                search_phrase: ''
             }
         },
         methods: {
             searchStart() {
+                // alert(this.search_phrase);
+                UsersAPI
+                    .search(this.search_phrase)
+                    .then((data) => {
+                        console.log(data);
+                        this.$router.push('/dashboard/overview');
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
             }
         }
     }
