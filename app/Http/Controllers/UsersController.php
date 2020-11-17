@@ -32,11 +32,6 @@ class UsersController extends Controller
     public function index()
     {
         $user = auth()->user();
-
-        if (!$user->can('viewAny', User::class)) {
-            return $this->forbidden();
-        }
-
         $url = Request::all();
         $query = $this->usersRepo->getAllowedQueryFor($user);
         $data = $this->usersRepo->filterQuery($url, $query)->paginate();
@@ -58,25 +53,14 @@ class UsersController extends Controller
             return $this->notFound();
         }
 
-        if ($currentUser->can('view', $showUser)) {
-            return new UserResource($showUser);
-        } else {
-            return $this->forbidden();
-        }
+        return new UserResource($showUser);
+
     }
 
     public function store(CreateUser $request)
     {
         $user = auth()->user();
         $data = $request->all();
-
-        if (!$user->can('create')) {
-            return $this->forbidden();
-        }
-
-        if ($user->isAccountAdmin()) {
-            $data['account_id'] = $user['account_id'];
-        }
 
         $newUser = $this->usersRepo->create($data);
 

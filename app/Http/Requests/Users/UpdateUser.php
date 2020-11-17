@@ -28,7 +28,6 @@ class UpdateUser extends BaseRequest
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required',
-            'account_id' => '',
 //            'password' => 'required|min:5|max:100|confirmed',
 //            'password_confirmation' => 'required',
 //            'image' => 'required|mimes:jpeg,png,jpg,gif,svg',
@@ -44,7 +43,6 @@ class UpdateUser extends BaseRequest
             'address' => 'address',
             'email' => 'email ',
             'avatar' => 'avatar',
-            'role' => 'role',
             'password' => 'password'
         ];
     }

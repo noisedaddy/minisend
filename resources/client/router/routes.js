@@ -70,7 +70,32 @@ export default [
                     }
                 ]
             },
-
+            /**
+             * EMAILS
+             */
+            // {
+            //     path: 'emails',
+            //     component: EmailsIndex,
+            //     meta: {
+            //         title: "Emails",
+            //     },
+            //     children: [
+            //         {
+            //             path: 'create',
+            //             component: EmailsCreate,
+            //             meta: {
+            //                 title: "Create email",
+            //             }
+            //         },
+            //         {
+            //             path: ':emailId',
+            //             component: EmailsEdit,
+            //             meta: {
+            //                 title: "Email Detail",
+            //             }
+            //         }
+            //     ]
+            // },
         ],
     },
     {path: '*', component: NotFound}

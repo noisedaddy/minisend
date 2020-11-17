@@ -55,17 +55,12 @@ class User extends Authenticatable implements JWTSubject
         'first_login' => 'datetime',
     ];
 
-    public function account()
-    {
-        return $this->belongsTo(Account::class, 'account_id', 'id');
-    }
-
     /**
      * only account managers belong to companies
      */
-    public function companies()
+    public function emails()
     {
-        return $this->belongsToMany(Company::class, 'user_company', 'company_id', 'user_id');
+        return $this->hasMany(Email::class, 'user_id');
     }
 
     /**
@@ -77,7 +72,7 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->getKey();
     }
-    
+
     /**
      * Return a key value array, containing any custom claims to be added to the JWT.
      *
@@ -86,25 +81,5 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
-    }
-
-    public function isSuperAdmin()
-    {
-        return $this->role === UserRole::SUPER_ADMIN;
-    }
-
-    public function isAccountAdmin()
-    {
-        return $this->role === UserRole::ACCOUNT_ADMIN;
-    }
-
-    public function isAccountManager()
-    {
-        return $this->role === UserRole::ACCOUNT_MANAGER;
-    }
-
-    public function isEvaluator()
-    {
-        return $this->role === UserRole::EVALUATOR;
     }
 }

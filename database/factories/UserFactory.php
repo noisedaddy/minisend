@@ -21,15 +21,9 @@ $factory->define(User::class, function (Faker $faker) {
     $lastName = $faker->lastName;
 
     return [
-        'account_id' => null,
         'first_name' => $firstName,
         'last_name' => $lastName,
-        'full_name' => $firstName . " " . $lastName,
         'email' => $faker->unique()->safeEmail,
-        'role' => rand(1,4),
-        'phone_number' => $faker->phoneNumber,
-        'address' => $faker->address,
-        'position' => $faker->jobTitle,
         'password' => bcrypt('sample'), // password
         'remember_token' => Str::random(10),
     ];

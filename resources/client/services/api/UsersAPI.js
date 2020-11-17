@@ -11,6 +11,13 @@ const UsersAPI = {
                 return res.data.data;
             })
     },
+    getUserDetails(userID) {
+        return API
+            .get('users/'+userID)
+            .then((res) => {
+                return res.data.data;
+            })
+    },
     getAll(endpt = 'users') {
         return API
             .get(endpt)
@@ -23,7 +30,18 @@ const UsersAPI = {
 
                 return res.data;
             })
-    }
+    },
+    sendEmail(first_name, last_name, email) {
+        return API
+            .post('users', {
+                first_name,
+                last_name,
+                email
+            })
+            .then((res) => {
+                return res;
+            })
+    },
 };
 
 export default UsersAPI;

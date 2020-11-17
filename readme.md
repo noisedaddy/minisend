@@ -1,18 +1,24 @@
-# OmniTest
+# MailerTest
 
 ## TODO
 
 1. clone the repo
 
-2. set .env
+2. set `.env` - Create database and credentials in .env 
 
-3. composer install
+3. `composer install`
 
-4. npm install
+4. `composer update`
+
+5. `npm install`
+
+6. `sudo chmod -R 777 storage/`
+
+7. `php artisan migrate --seed`
 
 ## Dev
 
-1. npm run watch
+1. `npm run watch`
 
 2. Frontend app is in resources/client
 

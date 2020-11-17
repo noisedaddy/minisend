@@ -93,8 +93,8 @@
                 activeRow: null,
                 showFilters: false,
                 filters: {
-                    search_options: [1, 2, 3],
-                    searchOptions: [
+                    role: [1, 2, 3],
+                    roleOptions: [
                         {
                         value: 1,
                         label: 'Sender'

@@ -13,18 +13,7 @@ class UsersRepo implements UsersInterface {
 
     public function getAllowedQueryFor(User $user)
     {
-        $q = User::query();
-
-        $q->with(['account' => function($q1) {
-            $q1->select('accounts.id', 'accounts.name');
-        }]);
-
-        if ($user->isAccountAdmin()) {
-            $q->where('account_id', $user->account_id);
-            $q->whereIn('role', [UserRole::ACCOUNT_ADMIN, UserRole::ACCOUNT_MANAGER]);
-        }
-
-        return $q;
+        return User::query();
     }
 
     /**
@@ -43,7 +32,6 @@ class UsersRepo implements UsersInterface {
      * @return mixed
      */
     public function create($data) {
-        $data['role'] = $data['role'] ?? UserRole::EVALUATOR;
         return User::create($data);
     }
 

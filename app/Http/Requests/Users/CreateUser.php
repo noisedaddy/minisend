@@ -29,9 +29,6 @@ class CreateUser extends BaseRequest
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required',
-            'account_id' => '',
-            'password' => 'required|min:5|max:100|confirmed',
-            'password_confirmation' => 'required',
 //             'image' => 'required|mimes:jpeg,png,jpg,gif,svg',
         ];
     }
@@ -41,12 +38,7 @@ class CreateUser extends BaseRequest
         return [
             'first_name' => 'first name',
             'last_name' => 'last name',
-            'phone_number' => 'phone number',
-            'address' => 'address',
             'email' => 'email ',
-            'avatar' => 'avatar',
-            'role' => 'role',
-            'password' => 'password'
         ];
     }
 }

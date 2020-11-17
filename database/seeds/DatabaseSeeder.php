@@ -13,8 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         factory(\App\Models\User::class, 1)->create([
             'email'    => 'admin@admin.com',
-            'password' => bcrypt('123123'),
-            'role'     => \App\Support\Enums\UserRole::SUPER_ADMIN
+            'password' => bcrypt('123123')
         ]);
 
 

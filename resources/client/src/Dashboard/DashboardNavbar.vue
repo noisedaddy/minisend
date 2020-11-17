@@ -6,7 +6,7 @@
         >
             <template slot="brand">
                 <router-link to="/dashboard/overview">
-                    <img src="/img/quizzology.png" class="quizzologyLogo" alt="Quizzology">
+                    <span>Home</span>
                 </router-link>
             </template>
 
