@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Emails\Search;
 use App\Http\Requests\Emails\CreateEmail;
+use App\Jobs\SendEmail;
 use App\Models\Email;
 use App\Repositories\Emails\EmailsRepo;
 use App\Repositories\User\UserRepo;
@@ -56,12 +57,15 @@ class EmailController extends Controller
     {
         $request->merge(
             array(
-                'user_id' => auth()->user()->id
+                'user_id' => auth()->user()->id,
+                'status' => 'posted'
             )
         );
         $data = $request->all();
         $newEmail = $this->emailsRepo->create($data);
-        dd($newEmail);
+        if ($newEmail) {
+            dispatch(new SendEmail($newEmail));
+        }
         return new EmailResource($newEmail);
     }
 

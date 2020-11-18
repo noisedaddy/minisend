@@ -20,7 +20,8 @@ class Email extends Model
         'recipient',
         'subject',
         'text_content',
-        'html_content'
+        'html_content',
+        'status'
     ];
 
     public function user(){

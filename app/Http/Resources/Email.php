@@ -22,6 +22,7 @@ class Email extends JsonResource
             'subject' => $this->subject,
             'text_content' => $this->text_content,
             'html_content' => $this->html_content,
+            'status' => $this->status
         ];
     }
 }

@@ -15,7 +15,7 @@
                 <div class="row align-items-center justify-content-xl-between">
                     <div class="col-xl-6">
                         <div class="copyright text-center text-xl-left text-muted">
-                            © {{year}} <a href="https://www.theenglishquiz.com" class="font-weight-bold ml-1" target="_blank">The English Quiz</a>
+                            © {{year}} <a href="https://www.theenglishquiz.com" class="font-weight-bold ml-1" target="_blank">Mailer test</a>
                         </div>
                     </div>
                     <div class="col-xl-6">
