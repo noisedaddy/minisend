@@ -35,6 +35,17 @@ const EmailAPI = {
                 return res;
             })
     },
+    search(search_phrase, values) {
+        return API
+            .post('emails/search', {
+                search_phrase,
+                values
+            })
+            .then((res) => {
+                console.log(res);
+                return res;
+            })
+    },
 };
 
 export default EmailAPI;

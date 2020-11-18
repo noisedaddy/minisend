@@ -73,7 +73,7 @@ class EmailsRepo implements EmailsInterface {
             }
             return $query->get();
         } else {
-            return false;
+            return [];
         }
 
 

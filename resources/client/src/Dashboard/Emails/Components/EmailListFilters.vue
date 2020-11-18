@@ -38,6 +38,7 @@
 </template>
 <script>
     import EmailAPI from "@services/api/EmailAPI";
+    import EmailListTable from "@src/Dashboard/Emails/Components/EmailListTable";
 
     export default {
         name: 'EmailListFilters',
@@ -59,7 +60,11 @@
                     .search(this.search_phrase,this.value)
                     .then((data) => {
                         console.log(data);
-                        this.$router.push('/dashboard/emails');
+
+                        // this.$router.push('/dashboard/emails');
+                        // this.$router.push({path: '/dashboard/emails', component: EmailListTable, params: { emails: data}});
+                        // this.$router.go({path: this.$router.path, component: EmailListTable, params: { emails: data}});
+                        // this.$router.go({path:this.$router.path});
                     })
                     .catch((err) => {
                         console.log(err);

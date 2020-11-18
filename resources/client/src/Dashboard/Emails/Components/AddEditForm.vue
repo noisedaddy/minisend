@@ -40,14 +40,15 @@
                                 <base-input placeholder="HTML Content"  v-model="html_content" v-else></base-input>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label form-control-label">Attachment</label>
-                        <div class="col-md-9">
-                            <file-input v-model="fileSingle" id="avatar-upload"></file-input>
-                            <label for="avatar-upload" class="mt-2"> JPG or PNG; max: 1MB</label>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label form-control-label">Attachment</label>
+                            <div class="col-md-9">
+                                <file-input v-model="fileSingle" id="avatar-upload"></file-input>
+                                <label for="avatar-upload" class="mt-2"> JPG or PNG; max: 1MB</label>
+                            </div>
                         </div>
                     </div>
+
                     <div class="form-group row">
                         <base-button type="primary"
                                      class="my-4"
@@ -70,7 +71,7 @@
 
     export default {
         mounted() {
-            // console.log('AddEditForm '+JSON.stringify(this.user));
+
         },
         name: "AddEditForm",
         props: ["email"],
@@ -93,7 +94,8 @@
                     .sendEmail(this.sender, this.recipient, this.subject,this.text_content, this.html_content)
                     .then((data) => {
                         console.log(data);
-                        this.$router.push('/dashboard/emails');
+                        // this.$router.push('/dashboard/emails');
+                        this.$router.go({path:this.$router.path});
                     })
                     .catch((err) => {
                         console.log(err);

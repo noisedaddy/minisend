@@ -16,12 +16,10 @@ use Illuminate\Support\Facades\Request;
 class EmailController extends Controller
 {
     protected $emailsRepo;
-    protected $userRepo;
 
-    public function __construct(EmailsRepo $emailsRepo, UsersRepo $userRepo)
+    public function __construct(EmailsRepo $emailsRepo)
     {
         $this->emailsRepo = $emailsRepo;
-        $this->userRepo = $userRepo;
     }
 
     /**
@@ -35,7 +33,6 @@ class EmailController extends Controller
      */
     public function index()
     {
-//        $user = auth()->user();
         $url = Request::all();
         $query = $this->emailsRepo->getAllowedQueryFor();
         $data = $this->emailsRepo->filterQuery($url, $query)->paginate();
@@ -57,8 +54,14 @@ class EmailController extends Controller
 
     public function store(CreateEmail $request)
     {
+        $request->merge(
+            array(
+                'user_id' => auth()->user()->id
+            )
+        );
         $data = $request->all();
         $newEmail = $this->emailsRepo->create($data);
+        dd($newEmail);
         return new EmailResource($newEmail);
     }
 

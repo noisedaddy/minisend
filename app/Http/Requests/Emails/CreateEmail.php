@@ -24,9 +24,8 @@ class CreateEmail extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required',
-            'sender' => 'required',
-            'recipient' => 'required',
+            'sender' => 'required|email',
+            'recipient' => 'required|email',
             'subject' => 'required',
             'text_content' => 'required',
             'html_content' => 'required',

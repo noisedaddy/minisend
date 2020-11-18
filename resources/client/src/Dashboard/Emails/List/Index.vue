@@ -76,13 +76,12 @@
 <script>
     import EmailListTable from '../Components/EmailListTable';
     import EmailListFilters from '../Components/EmailListFilters'
-    import UsersAPI from '@services/api/EmailAPI'
     import BaseLoading from "@/shared/BaseLoading";
     import EmailAPI from "@services/api/EmailAPI";
     // import EmailListTable from "@src/Dashboard/Emails/Components/EmailListTable";
 
     export default {
-        name: "ListUsersIndex",
+        name: "ListEmailsIndex",
         components: {
             BaseLoading,
             EmailListTable,

@@ -33,11 +33,6 @@
                              min-width="120px"
                              sortable>
             </el-table-column>
-            <el-table-column label="HTML Content"
-                             prop="html_content"
-                             min-width="120px"
-                             sortable>
-            </el-table-column>
         </el-table>
         <div
             slot="footer"
