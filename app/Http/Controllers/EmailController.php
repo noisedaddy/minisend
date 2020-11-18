@@ -35,9 +35,9 @@ class EmailController extends Controller
      */
     public function index()
     {
-        $user = auth()->user();
+//        $user = auth()->user();
         $url = Request::all();
-        $query = $this->userRepo->getAllowedQueryFor($user);
+        $query = $this->emailsRepo->getAllowedQueryFor();
         $data = $this->emailsRepo->filterQuery($url, $query)->paginate();
 
         return EmailResource::collection($data);

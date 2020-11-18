@@ -15,10 +15,10 @@ const EmailAPI = {
         return API
             .get(endpt)
             .then((res) => {
-                res.data.data = res.data.data.map((email) => {
-                    return email;
-                })
-
+                // res.data.data = res.data.data.map((email) => {
+                //     return email;
+                // })
+                console.log(JSON.stringify(res.data));
                 return res.data;
             })
     },

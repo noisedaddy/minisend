@@ -14,7 +14,7 @@ class EmailsRepo implements EmailsInterface {
 
     use FilterableTrait;
 
-    public function getAllowedQueryFor(User $user)
+    public function getAllowedQueryFor()
     {
         return Email::query();
     }
