@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Users;
 
+use App\Models\Email;
 use App\Models\User;
 use App\Support\Enums\UserRole;
 use Illuminate\Support\Facades\DB;
@@ -64,12 +65,19 @@ class UsersRepo implements UsersInterface {
         $search = $data['search_phrase'];
         $searchOptions = $data['values']['role'];
 
-        if (is_array($searchOptions) && !empty($searchOptions))
-            dd($searchOptions);
-        else
-            dd('empty');
+        if (is_array($searchOptions) && !empty($searchOptions)){
+            $query = Email::query();
+            foreach ($searchOptions as $key=>$value){
+                $query->orWhere("$value" ,'LIKE', '%' . $search . '%');
+            }
+            return $query->get();
+        } else {
+            return false;
+        }
 
-        return User::where('first_name', 'LIKE', '%' . $search . '%')->orWhere('last_name', 'LIKE', '%' . $search . '%')->orWhere('email', 'LIKE', '%' . $search . '%')->get();
+
+
+//        return User::where('first_name', 'LIKE', '%' . $search . '%')->orWhere('last_name', 'LIKE', '%' . $search . '%')->orWhere('email', 'LIKE', '%' . $search . '%')->get();
     }
 
 }

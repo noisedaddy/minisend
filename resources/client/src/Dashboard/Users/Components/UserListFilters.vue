@@ -22,7 +22,7 @@
                     </base-input>
                 </div>
                 <div class="row mt-3">
-                    <base-input class="col-12" label="Search" v-model="search_phrase">
+                    <base-input class="col-12" label="Search Term" v-model="search_phrase">
                     </base-input>
                 </div>
                 <div class="form-group row">

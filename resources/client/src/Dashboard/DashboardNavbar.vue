@@ -280,10 +280,10 @@
                         </router-link>
                     </li>
                     <li class="nav-item"
-                        :class="{'active' : $route.path.indexOf('dashboard/candidates') > -1}"
+                        :class="{'active' : $route.path.indexOf('dashboard/emails') > -1}"
                     >
-                        <router-link to="/dashboard/candidates/list" class="nav-link">
-                            <i class="fas fa-users"></i> {{ $t('candidates') }}
+                        <router-link to="/dashboard/emails" class="nav-link">
+                            <i class="fas fa-users"></i> {{ $t('emails') }}
                         </router-link>
                     </li>
                 </ul>

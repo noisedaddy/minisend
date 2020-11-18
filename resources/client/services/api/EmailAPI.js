@@ -6,7 +6,7 @@ let API = new _API;
 const EmailAPI = {
     getEmailDetails(emailID) {
         return API
-            .get('users/'+emailID)
+            .get('emails/'+emailID)
             .then((res) => {
                 return res.data.data;
             })
