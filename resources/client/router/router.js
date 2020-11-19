@@ -21,7 +21,7 @@ const router = new VueRouter({
 });
 
 router.afterEach((to, from) => {
-    document.title = (to.meta && to.meta.title ? to.meta.title + " - " : "") + "Quizzology";
+    document.title = (to.meta && to.meta.title ? to.meta.title + " - " : "") + "Mailer";
 })
 
 export default router;

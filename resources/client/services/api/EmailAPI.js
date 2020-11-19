@@ -22,14 +22,15 @@ const EmailAPI = {
                 return res.data;
             })
     },
-    sendEmail(sender, recipient, subject, text_content, html_content) {
+    sendEmail(sender, recipient, subject, text_content, html_content, uniqueID) {
         return API
             .post('emails', {
                 sender,
                 recipient,
                 subject,
                 text_content,
-                html_content
+                html_content,
+                uniqueID
             })
             .then((res) => {
                 return res;
@@ -41,6 +42,14 @@ const EmailAPI = {
                 search_phrase,
                 values
             })
+            .then((res) => {
+                console.log(res);
+                return res;
+            })
+    },
+    uploadFiles(formData, config) {
+        return API
+            .post('emails/upload', formData, config)
             .then((res) => {
                 console.log(res);
                 return res;

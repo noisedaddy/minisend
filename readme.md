@@ -16,6 +16,8 @@
 
 7. `php artisan migrate --seed`
 
+8. `sudo chmod -R 777 public/uploads/`
+
 ## Dev
 
 1. `npm run watch`

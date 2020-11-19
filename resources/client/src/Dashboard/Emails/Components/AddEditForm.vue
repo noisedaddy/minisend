@@ -7,7 +7,6 @@
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label form-control-label">Sender</label>
                             <div class="col-md-9">
-                                <!--                            <base-input placeholder="First Name">{{ user ? user.first_name : null  }}</base-input>-->
                                 <base-input placeholder="Sender"  v-if="email" :value="email.sender" disabled="true"></base-input>
                                 <base-input placeholder="Sender"  v-model="sender" v-else></base-input>
                             </div>
@@ -41,10 +40,14 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 col-form-label form-control-label">Attachment</label>
+                            <label class="col-md-3 col-form-label form-control-label">Attachments</label>
                             <div class="col-md-9">
-                                <file-input v-model="fileSingle" id="avatar-upload" multiple></file-input>
-                                <label for="avatar-upload" class="mt-2"> JPG or PNG; max: 1MB</label>
+<!--&lt;!&ndash;                                <file-input v-model="fileSingle" id="avatar-upload"></file-input>&ndash;&gt;-->
+                                <input type="file" class="form-control" v-on:change="onFileChange">
+                                <label for="file" class="mt-2"> jpeg,png,jpg,gif,svg MAX: 1MB</label>
+                            </div>
+                            <div id="attachments" name="attachments">
+<!--                                <span v-for="item in items" ><span v-html="item[0]"></span> - <span v-html="item[1]"></span></span>-->
                             </div>
                         </div>
                     </div>
@@ -57,7 +60,12 @@
                         </base-button>
                     </div>
                 </form>
-
+<!--                <div class="form-group row">-->
+<!--                    <form enctype="multipart/form-data">-->
+<!--                        <strong>File:</strong>-->
+<!--                        <input type="file" class="form-control" v-on:change="onFileChange">-->
+<!--                    </form>-->
+<!--                </div>-->
             </div>
         </div>
 
@@ -71,10 +79,10 @@
 
     export default {
         mounted() {
-
+            this.array = {};
         },
         name: "AddEditForm",
-        props: ["email"],
+        props: ["email","settings"],
         components: {
             FileInput,
         },
@@ -85,13 +93,20 @@
                 subject: '',
                 text_content:'',
                 html_content: '',
-                fileSingle: []
+                file: '',
+                uniqueID : '',
+                items:[],
+                // item:['NEW VALUE','NEW VALUE_2'],
             }
+        },
+        created() {
+            this.uniqueID = this.randomStr(20, '123456789abcdefghijklmnopqrstuvwxyz');
+            // this.items.push(this.item);
         },
         methods: {
             sendEmail() {
                 EmailAPI
-                    .sendEmail(this.sender, this.recipient, this.subject,this.text_content, this.html_content)
+                    .sendEmail(this.sender, this.recipient, this.subject, this.text_content, this.html_content, this.uniqueID)
                     .then((data) => {
                         console.log(data);
                         // this.$router.push('/dashboard/emails');
@@ -100,6 +115,56 @@
                     .catch((err) => {
                         console.log(err);
                     })
+            },
+            onFileChange(e){
+                console.log(e.target.files[0]);
+                this.file = e.target.files[0];
+                // this.items.push(this.item);
+                // let currentObj = this;
+                const config = {
+                    headers: { 'content-type': 'multipart/form-data' }
+                }
+
+                let formData = new FormData();
+                formData.append('file', this.file);
+                formData.append('uniqueID', this.uniqueID);
+
+                EmailAPI
+                    .uploadFiles(formData, config)
+                    .then((data) => {
+                        console.log(data.data.success);
+                        this.items.push([data.data.success]);
+                        console.log(this.items);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
+
+
+                // axios.post('api/emails/upload', formData, config)
+                //     .then(function (response) {
+                //         console.log(response.data.success+ '    ' + response.data.path);
+                //         // this.item = ['</br><input type="text"/>','<input type="text"/></br>'];
+                //         // this.items.push(this.item);
+                //         // currentObj.success = response.data.success;
+                //         // let arrayAttachments = [];
+                //         // this.array.push({
+                //         //     'name':response.data.success,
+                //         // });
+                //         //
+                //     })
+                //     .catch(function (error) {
+                //         alert(JSON.stringify(error.message));
+                //         // currentObj.output = error;
+                //     });
+            },
+            randomStr(len, arr){
+                var ans = '';
+                for (var i = len; i > 0; i--) {
+                    ans +=
+                        arr[Math.floor(Math.random() * arr.length)];
+                }
+                return ans;
             }
         }
     }

@@ -21,7 +21,8 @@ class Email extends Model
         'subject',
         'text_content',
         'html_content',
-        'status'
+        'status',
+        'uniqueID'
     ];
 
     public function user(){

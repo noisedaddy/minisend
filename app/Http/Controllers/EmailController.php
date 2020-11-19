@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Emails\Search;
 use App\Http\Requests\Emails\CreateEmail;
+use App\Http\Requests\Emails\Upload;
 use App\Jobs\SendEmail;
 use App\Models\Email;
 use App\Repositories\Emails\EmailsRepo;
@@ -11,6 +12,8 @@ use App\Repositories\User\UserRepo;
 use App\Http\Resources\Email as EmailResource;
 use App\Repositories\Users\UsersRepo;
 use App\Services\File\FileUpload;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
 
 
@@ -64,7 +67,8 @@ class EmailController extends Controller
         $data = $request->all();
         $newEmail = $this->emailsRepo->create($data);
         if ($newEmail) {
-            dispatch(new SendEmail($newEmail));
+//            dispatch(new SendEmail($newEmail));
+            dispatch(new SendEmail($newEmail))->delay(Carbon::now()->addSeconds(50));
         }
         return new EmailResource($newEmail);
     }
@@ -83,6 +87,23 @@ class EmailController extends Controller
         } else{
             return $this->errorResponse($file['error']);
         }
+
+    }
+
+    /**
+     * Post request for attachments upload
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function handleUpload(Upload $request){
+
+        $fileName = time().'.'.$request->file->getClientOriginalExtension();
+        if ($request->file->move(public_path('uploads/'.$request->uniqueID.'/'), $fileName)) {
+            return response()->json(['success'=>$fileName, 'path' => public_path('uploads/'.$request->uniqueID.'/').$fileName]);
+        } else {
+            return response()->json(['error'=>'Error uploading file']);
+        }
+
 
     }
 

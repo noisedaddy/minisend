@@ -22,7 +22,7 @@ class CreateEmailsTable extends Migration
             $table->string('text_content')->nullable();
             $table->text('html_content')->nullable();
             $table->string('status')->nullable();
-            $table->binary('attachments')->nullable();
+            $table->string('uniqueID')->nullable();
             $table->timestamps();
         });
     }
