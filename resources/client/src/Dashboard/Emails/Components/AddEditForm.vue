@@ -96,7 +96,6 @@
                 file: '',
                 uniqueID : '',
                 items:[],
-                // item:['NEW VALUE','NEW VALUE_2'],
             }
         },
         created() {
@@ -131,35 +130,16 @@
                 EmailAPI
                     .uploadFiles(formData, config)
                     .then((data) => {
-                        console.log(data.data.success);
                         this.items.push({
                                     'name':data.data.success,
                                     'path':data.data.path
                                 });
-                        // this.items.push([data.data.success]);
-                        console.log(this.items);
+
                     })
                     .catch((err) => {
                         console.log(err);
                     })
 
-
-                // axios.post('api/emails/upload', formData, config)
-                //     .then(function (response) {
-                //         console.log(response.data.success+ '    ' + response.data.path);
-                //         // this.item = ['</br><input type="text"/>','<input type="text"/></br>'];
-                //         // this.items.push(this.item);
-                //         // currentObj.success = response.data.success;
-                //         // let arrayAttachments = [];
-                //         // this.array.push({
-                //         //     'name':response.data.success,
-                //         // });
-                //         //
-                //     })
-                //     .catch(function (error) {
-                //         alert(JSON.stringify(error.message));
-                //         // currentObj.output = error;
-                //     });
             },
             randomStr(len, arr){
                 var ans = '';

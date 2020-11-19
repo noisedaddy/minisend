@@ -14,9 +14,11 @@
 
 6. `sudo chmod -R 777 storage/`
 
-7. `php artisan migrate --seed`
+7. `php artisan migrate:fresh  --seed`
 
-8. `sudo chmod -R 777 public/uploads/`
+8. `sudo chmod -R 777 public/uploads/` add write permissions to public/uploads folder
+
+9. `php artisan queue:work` to be able to queue emails for 30sec
 
 ## Dev
 
