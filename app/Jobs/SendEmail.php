@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Mail\EmailSend;
 use App\Models\Email;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -31,7 +32,7 @@ class SendEmail implements ShouldQueue
      */
     public function handle()
     {
-        $sendEmail = new \App\Mail\SendEmail($this->email);
+        $sendEmail = new EmailSend($this->email);
         \Mail::to($this->email->recipient)->send($sendEmail);
     }
 }

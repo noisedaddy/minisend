@@ -5,13 +5,13 @@ namespace App\Mail;
 use App\Models\Email;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class SendEmail extends Mailable
+class EmailSend extends Mailable
 {
     use Queueable, SerializesModels;
+
     protected $email;
     public $subject = 'test subject';
 
@@ -32,7 +32,6 @@ class SendEmail extends Mailable
      */
     public function build()
     {
-
         $sendEmail =  $this->markdown('email')
             ->from($this->email->sender)
             ->subject($this->email->subject)
@@ -74,6 +73,5 @@ class SendEmail extends Mailable
 //        }
 
         return $sendEmail;
-
     }
 }
