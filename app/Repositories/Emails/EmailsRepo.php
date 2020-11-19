@@ -75,10 +75,6 @@ class EmailsRepo implements EmailsInterface {
         } else {
             return [];
         }
-
-
-
-//        return Email::where('first_name', 'LIKE', '%' . $search . '%')->orWhere('last_name', 'LIKE', '%' . $search . '%')->orWhere('email', 'LIKE', '%' . $search . '%')->get();
     }
 
 }

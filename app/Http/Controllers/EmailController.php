@@ -45,6 +45,11 @@ class EmailController extends Controller
         return EmailResource::collection($data);
     }
 
+    /**
+     * Show details for one email
+     * @param $id
+     * @return EmailResource|\Illuminate\Http\JsonResponse
+     */
     public function show($id)
     {
         $showEmail = $this->emailsRepo->find($id);
@@ -57,6 +62,11 @@ class EmailController extends Controller
 
     }
 
+    /**
+     * Store and send emails
+     * @param CreateEmail $request
+     * @return EmailResource
+     */
     public function store(CreateEmail $request)
     {
         $request->merge(
@@ -71,7 +81,6 @@ class EmailController extends Controller
             //Dispatch new email send job with delay of 30 sec
             dispatch(new SendEmail($newEmail))->delay(Carbon::now()->addSeconds(50));
         }
-//        return $newEmail->attachments()->get();
         return new EmailResource($newEmail);
     }
 

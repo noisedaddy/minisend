@@ -42,8 +42,8 @@
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label form-control-label">Attachments</label>
                             <div class="col-md-9">
-<!--&lt;!&ndash;                                <file-input v-model="fileSingle" id="avatar-upload"></file-input>&ndash;&gt;-->
-                                <input type="file" class="form-control" v-on:change="onFileChange">
+                                <input type="file" class="form-control" v-if="email" disabled="true" >
+                                <input type="file" class="form-control" v-on:change="onFileChange" v-else>
                                 <label for="file" class="mt-2"> jpeg,png,jpg,gif,svg MAX: 1MB</label>
                             </div>
                             <div id="attachments" name="attachments">
