@@ -79,7 +79,7 @@ class EmailController extends Controller
         $newEmail = $this->emailsRepo->create($data);
         if ($newEmail) {
             //Dispatch new email send job with delay of 30 sec
-            dispatch(new SendEmail($newEmail))->delay(Carbon::now()->addSeconds(50));
+            dispatch(new SendEmail($newEmail))->delay(Carbon::now()->addSeconds(20));
         }
         return new EmailResource($newEmail);
     }
