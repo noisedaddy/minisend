@@ -46,8 +46,10 @@
                                 <input type="file" class="form-control" v-on:change="onFileChange" v-else>
                                 <label for="file" class="mt-2"> jpeg,png,jpg,gif,svg MAX: 1MB</label>
                             </div>
-                            <div id="attachments" name="attachments">
-<!--                                <span v-for="item in items" ><span v-html="item[0]"></span> - <span v-html="item[1]"></span></span>-->
+                            <div>
+                                <ul>
+                                    <li v-model="attachments" v-for="i in attachments" v-bind:key="i.id">{{i}}</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -76,7 +78,7 @@
             this.array = {};
         },
         name: "AddEditForm",
-        props: ["email","settings"],
+        props: ["email","attachments"],
         components: {
             FileInput,
         },
@@ -89,7 +91,7 @@
                 html_content: '',
                 file: '',
                 uniqueID : '',
-                items:[],
+                items:[]
             }
         },
         created() {
@@ -110,7 +112,6 @@
                     })
             },
             onFileChange(e){
-                // console.log(e.target.files[0]);
                 this.file = e.target.files[0];
                 const config = {
                     headers: { 'content-type': 'multipart/form-data' }
@@ -120,7 +121,6 @@
                 formData.append('file', this.file);
                 formData.append('uniqueID', this.uniqueID);
 
-                console.log('onFileChange '+this.uniqueID);
                 EmailAPI
                     .uploadFiles(formData, config)
                     .then((data) => {

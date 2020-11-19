@@ -16,7 +16,7 @@
                     </div>
                 </div>
             </div>
-            <add-edit-form v-show="!isLoading" :email="email"></add-edit-form>
+            <add-edit-form v-show="!isLoading" :email="email" :attachments="attachments"></add-edit-form>
         </div>
     </div>
 </template>
@@ -28,7 +28,6 @@
     export default {
         mounted() {
             this.getEmailDetails();
-            console.log('EditUsersIndex '+this.$route.params.emailId);
         },
         name: "EditEmailsIndex",
         components: {
@@ -37,13 +36,19 @@
         data() {
             return {
                 isLoading: true,
-                email : {}
+                email : {},
+                attachments: []
             };
         },
         methods: {
             async getEmailDetails() {
                 this.isLoading = true;
                 this.email = await EmailAPI.getEmailDetails(this.$route.params.emailId);
+                console.log(JSON.stringify(this.email));
+                for (var i = 0; i < this.email.attachments.length; i++) {
+                    this.attachments[i] = this.email.attachments[i].name;
+                }
+                console.log(this.attachments);
                 this.isLoading = false;
             }
         }
