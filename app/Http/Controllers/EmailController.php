@@ -6,6 +6,7 @@ use App\Http\Requests\Emails\Search;
 use App\Http\Requests\Emails\CreateEmail;
 use App\Http\Requests\Emails\Upload;
 use App\Jobs\SendEmail;
+use App\Models\Attachment;
 use App\Models\Email;
 use App\Repositories\Emails\EmailsRepo;
 use App\Repositories\User\UserRepo;
@@ -67,9 +68,10 @@ class EmailController extends Controller
         $data = $request->all();
         $newEmail = $this->emailsRepo->create($data);
         if ($newEmail) {
-//            dispatch(new SendEmail($newEmail));
+            //Dispatch new email send job with delay of 30 sec
             dispatch(new SendEmail($newEmail))->delay(Carbon::now()->addSeconds(50));
         }
+//        return $newEmail->attachments()->get();
         return new EmailResource($newEmail);
     }
 
@@ -98,7 +100,14 @@ class EmailController extends Controller
     public function handleUpload(Upload $request){
 
         $fileName = time().'.'.$request->file->getClientOriginalExtension();
+        $fileMime = $request->file->getClientMimeType();
         if ($request->file->move(public_path('uploads/'.$request->uniqueID.'/'), $fileName)) {
+            $attachment = new Attachment();
+            $attachment->path = public_path('uploads/'.$request->uniqueID.'/').$fileName;
+            $attachment->name = $fileName;
+            $attachment->mime = $fileMime;
+            $attachment->uniqueID = $request->uniqueID;
+            $attachment->save();
             return response()->json(['success'=>$fileName, 'path' => public_path('uploads/'.$request->uniqueID.'/').$fileName]);
         } else {
             return response()->json(['error'=>'Error uploading file']);

@@ -5,6 +5,7 @@ namespace App\Mail;
 use App\Models\Email;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
@@ -31,14 +32,37 @@ class SendEmail extends Mailable
      */
     public function build()
     {
-        return $this->view('email')
+        $sendEmail =  $this->view('email')
             ->from($this->email->sender)
             ->subject($this->email->subject)
             ->with(
                 [
                     'text_content' => $this->email->text_content,
                     'html_content' => $this->email->html_content,
-                    ]
+                ]
             );
+
+        $fileSystem = new Filesystem();
+        $directory = public_path('uploads/'.$this->email->uniqueID);
+        if ($fileSystem->exists($directory)){
+            \Log::debug($directory.' exists');
+            $files = $fileSystem->files($directory);
+            \Log::debug(var_dump($files));
+            if (empty($files)){
+                $fileSystem->deleteDirectory($directory);
+                \Log::debug('Empty files');
+                return $sendEmail;
+            } else {
+                try {
+                    $sendEmail->attach($files);
+                } catch (Exception $e){
+                    \Log::alert($e->getMessage());
+                }
+
+            }
+        }
+
+        return $sendEmail;
+
     }
 }

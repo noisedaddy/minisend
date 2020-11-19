@@ -17,6 +17,8 @@ class CreateAttachmentsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('email_id')->nullable();
             $table->string('path')->nullable();
+            $table->string('name')->nullable();
+            $table->string('mime')->nullable();
             $table->string('uniqueID')->nullable();
             $table->timestamps();
         });

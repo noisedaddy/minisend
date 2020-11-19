@@ -4,7 +4,7 @@
 
 1. clone the repo
 
-2. set `.env` - Create database and credentials in .env 
+2. copy `.env.example` to `.env` and add database and queue credentials 
 
 3. `composer install`
 

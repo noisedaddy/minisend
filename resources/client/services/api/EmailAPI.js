@@ -22,7 +22,7 @@ const EmailAPI = {
                 return res.data;
             })
     },
-    sendEmail(sender, recipient, subject, text_content, html_content, uniqueID) {
+    sendEmail(sender, recipient, subject, text_content, html_content, uniqueID, items) {
         return API
             .post('emails', {
                 sender,
@@ -30,7 +30,8 @@ const EmailAPI = {
                 subject,
                 text_content,
                 html_content,
-                uniqueID
+                uniqueID,
+                items
             })
             .then((res) => {
                 return res;

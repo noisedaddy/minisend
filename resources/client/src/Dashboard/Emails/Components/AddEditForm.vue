@@ -101,26 +101,24 @@
         },
         created() {
             this.uniqueID = this.randomStr(20, '123456789abcdefghijklmnopqrstuvwxyz');
-            // this.items.push(this.item);
+            console.log('Created '+this.uniqueID);
         },
         methods: {
             sendEmail() {
                 EmailAPI
-                    .sendEmail(this.sender, this.recipient, this.subject, this.text_content, this.html_content, this.uniqueID)
+                    .sendEmail(this.sender, this.recipient, this.subject, this.text_content, this.html_content, this.uniqueID, this.items)
                     .then((data) => {
                         console.log(data);
-                        // this.$router.push('/dashboard/emails');
                         this.$router.go({path:this.$router.path});
+
                     })
                     .catch((err) => {
                         console.log(err);
                     })
             },
             onFileChange(e){
-                console.log(e.target.files[0]);
+                // console.log(e.target.files[0]);
                 this.file = e.target.files[0];
-                // this.items.push(this.item);
-                // let currentObj = this;
                 const config = {
                     headers: { 'content-type': 'multipart/form-data' }
                 }
@@ -129,11 +127,16 @@
                 formData.append('file', this.file);
                 formData.append('uniqueID', this.uniqueID);
 
+                console.log('onFileChange '+this.uniqueID);
                 EmailAPI
                     .uploadFiles(formData, config)
                     .then((data) => {
                         console.log(data.data.success);
-                        this.items.push([data.data.success]);
+                        this.items.push({
+                                    'name':data.data.success,
+                                    'path':data.data.path
+                                });
+                        // this.items.push([data.data.success]);
                         console.log(this.items);
                     })
                     .catch((err) => {
