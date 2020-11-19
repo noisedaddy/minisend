@@ -42,7 +42,7 @@
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label form-control-label">Attachments</label>
                             <div class="col-md-9">
-                                <input type="file" class="form-control" v-if="email" disabled="true" >
+                                <input type="file" class="form-control" v-if="email" disabled="true">
                                 <input type="file" class="form-control" v-on:change="onFileChange" v-else>
                                 <label for="file" class="mt-2"> jpeg,png,jpg,gif,svg MAX: 1MB</label>
                             </div>
@@ -60,12 +60,6 @@
                         </base-button>
                     </div>
                 </form>
-<!--                <div class="form-group row">-->
-<!--                    <form enctype="multipart/form-data">-->
-<!--                        <strong>File:</strong>-->
-<!--                        <input type="file" class="form-control" v-on:change="onFileChange">-->
-<!--                    </form>-->
-<!--                </div>-->
             </div>
         </div>
 

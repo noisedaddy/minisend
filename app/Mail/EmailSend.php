@@ -38,7 +38,7 @@ class EmailSend extends Mailable
             ->with(
                 [
                     'text_content' => $this->email->text_content,
-                    'html_content' => $this->email->html_content,
+                    'html_content' => html_entity_decode($this->email->html_content),
                 ]
             );
 

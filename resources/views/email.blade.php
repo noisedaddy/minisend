@@ -8,7 +8,7 @@
 <p>{{ $text_content }}</p>
 
 <p>
-    {{ $html_content }}
+    {!! $html_content !!}
 </p>
 
 </body>
