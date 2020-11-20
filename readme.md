@@ -20,16 +20,15 @@
 
 9. `php artisan queue:work` to be able to queue emails for 30sec
 
+10. route for login is `/auth/login` login: admin@admin.com 12123
+
 ## Dev
 
 1. `npm run watch`
 
 2. Frontend app is in resources/client
 
-3. App uses Argon Pro Theme, see list of components here: https://demos.creative-tim.com/vue-argon-dashboard-pro/documentation/
-
-4. To see theme demo views code, download the theme package [here](https://drive.google.com/file/d/1d0mgRgdhKODBBe7pjXrYrizQcRWa6YCV/view?usp=sharing) and look in src/views/
-
+3. Email `sent` status is updated from event Listiner after the mail is sent from queue
 
 ### General Dev Guidelines
 
