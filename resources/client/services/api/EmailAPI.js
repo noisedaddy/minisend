@@ -44,6 +44,20 @@ const EmailAPI = {
                 return res;
             })
     },
+    //Used for testing search options from GET url instead of POST
+    search2(endpt = 'emails',search_phrase, values) {
+        return API
+            .get(endpt+'&search='+search_phrase+'&values='+values, {
+                params:{
+                    search: search_phrase,
+                    search_options: values
+                }
+            })
+            .then((res) => {
+                console.log(res);
+                return res;
+            })
+    },
     uploadFiles(formData, config) {
         return API
             .post('emails/upload', formData, config)

@@ -30,18 +30,20 @@ class EmailController extends Controller
 
     /**
      * Get paginated emails.
-     * search - string, search within user first name, last name and email
-     * role - integer list eg. role=1,2,4 means show only users who have role Super Admin or Account Admin or Evaluator
+     * If search options are ON, search - string, search within search term, subject, recipient and sender
      * order - signifies order by column (e.g. order=+name means order by name ascending)
-     * account_id
      * page - current paginated page
-     * ?page=5&search[name]=john,mike&account_id=4,role=3&order=acs
+     * getAllowedQueryFor is for filtering API calls. In this case is blank because is simply queries
      */
     public function index()
     {
         $url = Request::all();
-        $query = $this->emailsRepo->getAllowedQueryFor();
-        $data = $this->emailsRepo->filterQuery($url, $query)->paginate();
+        if (isset($url['search']) && !empty($url['search'])) {
+            $data = $this->emailsRepo->search($url)->paginate();
+        } else {
+            $query = $this->emailsRepo->getQuery();
+            $data = $this->emailsRepo->filterQuery($url, $query)->paginate();
+        }
 
         return EmailResource::collection($data);
     }
@@ -94,7 +96,6 @@ class EmailController extends Controller
 
         $file = FileUpload::handle();
         if (isset($file['success'])) {
-            $email = Email::find($id);
             return $this->dataResponse($file['success']);
         } else{
             return $this->errorResponse($file['error']);

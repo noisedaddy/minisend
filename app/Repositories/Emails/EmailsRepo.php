@@ -14,7 +14,11 @@ class EmailsRepo implements EmailsInterface {
 
     use FilterableTrait;
 
-    public function getAllowedQueryFor()
+    /**
+     * Allowed query for given user, in this case is allowed for all
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function getQuery()
     {
         return Email::query();
     }
@@ -61,10 +65,17 @@ class EmailsRepo implements EmailsInterface {
 
     }
 
+    /**
+     * Search according to passed data and search criteria
+     * @param array $data
+     * @return array|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
     public function search(array $data)
     {
         $search = $data['search_phrase'];
         $searchOptions = $data['values']['role'];
+//        $search = $data['search'];
+//        $searchOptions = explode(',',$data['values']);
 
         if (is_array($searchOptions) && !empty($searchOptions)){
             $query = Email::query();
