@@ -272,13 +272,13 @@
                             <i class="fas fa-tachometer-alt"></i> {{ $t('dashboard') }}
                         </router-link>
                     </li>
-                    <li class="nav-item"
-                        :class="{'active' : $route.path.indexOf('dashboard/users') > -1}"
-                    >
-                        <router-link to="/dashboard/users" class="nav-link">
-                            <i class="fas fa-user-tie"></i> {{ $t('users') }}
-                        </router-link>
-                    </li>
+<!--                    <li class="nav-item"-->
+<!--                        :class="{'active' : $route.path.indexOf('dashboard/users') > -1}"-->
+<!--                    >-->
+<!--                        <router-link to="/dashboard/users" class="nav-link">-->
+<!--                            <i class="fas fa-user-tie"></i> {{ $t('users') }}-->
+<!--                        </router-link>-->
+<!--                    </li>-->
                     <li class="nav-item"
                         :class="{'active' : $route.path.indexOf('dashboard/emails') > -1}"
                     >

@@ -51,29 +51,29 @@ export default [
             /**
              * USERS
              */
-            {
-                path: 'users',
-                component: UsersIndex,
-                meta: {
-                    title: "Users",
-                },
-                children: [
-                    {
-                        path: 'create',
-                        component: UsersCreate,
-                        meta: {
-                            title: "Create a user",
-                        }
-                    },
-                    {
-                        path: ':userId',
-                        component: UsersEdit,
-                        meta: {
-                            title: "Edit user",
-                        }
-                    }
-                ]
-            },
+            // {
+            //     path: 'users',
+            //     component: UsersIndex,
+            //     meta: {
+            //         title: "Users",
+            //     },
+            //     children: [
+            //         {
+            //             path: 'create',
+            //             component: UsersCreate,
+            //             meta: {
+            //                 title: "Create a user",
+            //             }
+            //         },
+            //         {
+            //             path: ':userId',
+            //             component: UsersEdit,
+            //             meta: {
+            //                 title: "Edit user",
+            //             }
+            //         }
+            //     ]
+            // },
             /**
              * EMAILS
              */
