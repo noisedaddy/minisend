@@ -2,11 +2,13 @@
 
 namespace App\Jobs;
 
+use App\Listeners\LogSentMessage;
 use App\Mail\EmailSend;
 use App\Models\Email;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Mail\Events\MessageSending;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
@@ -34,5 +36,6 @@ class SendEmail implements ShouldQueue
     {
         $sendEmail = new EmailSend($this->email);
         \Mail::to($this->email->recipient)->send($sendEmail);
+        event(new MessageSending($sendEmail, ['id' => $this->email->id]));
     }
 }

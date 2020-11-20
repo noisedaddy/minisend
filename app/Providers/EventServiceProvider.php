@@ -3,10 +3,12 @@
 namespace App\Providers;
 
 use App\Listeners\Auth\SyncLoginTimes;
+use App\Listeners\LogSentMessage;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Illuminate\Mail\Events\MessageSending;
 use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
@@ -19,6 +21,9 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Login::class => [
             SyncLoginTimes::class
+        ],
+        MessageSending::class => [
+            LogSentMessage::class
         ]
     ];
 

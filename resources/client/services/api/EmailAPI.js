@@ -48,7 +48,16 @@ const EmailAPI = {
         return API
             .post('emails/upload', formData, config)
             .then((res) => {
-                console.log(res);
+                return res;
+            })
+    },
+    deleteFiles(name, uniqueID) {
+        return API
+            .post('emails/files/delete', {
+                name,
+                uniqueID
+            } )
+            .then((res) => {
                 return res;
             })
     },

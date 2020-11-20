@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Listeners\LogSentMessage;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 

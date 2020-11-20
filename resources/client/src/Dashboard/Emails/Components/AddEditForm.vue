@@ -46,9 +46,14 @@
                                 <input type="file" class="form-control" v-on:change="onFileChange" v-else>
                                 <label for="file" class="mt-2"> jpeg,png,jpg,gif,svg MAX: 1MB</label>
                             </div>
-                            <div>
+                            <div class="col-md-9" id="attachments_detail">
                                 <ul>
                                     <li v-model="attachments" v-for="i in attachments" v-bind:key="i.id">{{i}}</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-9" id="attachments_add">
+                                <ul>
+                                    <li v-model="items" v-for="i in items" v-bind:key="i.name">{{i.name}}<span @click="clickDelete(i.name)"><b>  Delete</b></span></li>
                                 </ul>
                             </div>
                         </div>
@@ -129,6 +134,8 @@
                                     'path':data.data.path
                                 });
 
+
+                        console.log(this.items);
                     })
                     .catch((err) => {
                         console.log(err);
@@ -142,6 +149,17 @@
                         arr[Math.floor(Math.random() * arr.length)];
                 }
                 return ans;
+            },
+            clickDelete: function(name){
+                EmailAPI
+                    .deleteFiles(name, this.uniqueID)
+                    .then((res) => {
+                        console.log(res);
+                        this.items = res.data;
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
             }
         }
     }

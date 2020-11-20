@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Emails\Delete;
 use App\Http\Requests\Emails\Search;
 use App\Http\Requests\Emails\CreateEmail;
 use App\Http\Requests\Emails\Upload;
@@ -134,4 +135,18 @@ class EmailController extends Controller
         return $this->emailsRepo->search($request->toArray());
     }
 
+    /**
+     * Delete file from db and return rest of uploaded files
+     */
+    public function deleteFiles(Delete $request){
+
+        $file = Attachment::where('uniqueID',$request->uniqueID)->where('name',$request->name)->delete();
+        if ($file) {
+            \File::delete(public_path('uploads/'.$request->uniqueID.'/').$request->name);
+            return Attachment::where('uniqueID',$request->uniqueID)->get('name','path');
+        } else {
+            return false;
+        }
+
+    }
 }

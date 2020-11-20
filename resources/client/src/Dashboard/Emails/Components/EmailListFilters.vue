@@ -48,6 +48,9 @@
                 default: () => {}
             }
         },
+        components: {
+            EmailListTable
+        },
         data() {
             return {
                 search_phrase: ''
@@ -60,7 +63,9 @@
                     .search(this.search_phrase,this.value)
                     .then((data) => {
                         console.log(data);
-
+                        // this.EmailListTable.data().emails = data;
+                        // this.$emit('clicked', data);
+                        // this.emails = data;
                         // this.$router.push('/dashboard/emails');
                         // this.$router.push({path: '/dashboard/emails', component: EmailListTable, params: { emails: data}});
                         // this.$router.go({path: this.$router.path, component: EmailListTable, params: { emails: data}});
