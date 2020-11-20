@@ -71,7 +71,7 @@
     } from 'element-ui'
     import UsersAPI from '../../../../services/api/UsersAPI'
     import BaseServerSidePagination from '../../../../shared/BaseServerSidePagination'
-
+    //Users fetch
     export default {
         name: "UserListTable",
         components: {
