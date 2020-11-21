@@ -18,12 +18,12 @@ class LogSentMessage
      */
     public function handle(MessageSending $event)
     {
-        $update = [
-            'status' => 'sent'
-        ];
 
         if (isset($event->data) && !empty($event->data['id'])){
             $email = Email::find($event->data['id']);
+            $update = [
+                'status' => $event->data['type']
+            ];
             $email->update($update);
         }
 

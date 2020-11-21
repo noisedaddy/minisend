@@ -36,6 +36,10 @@ class SendEmail implements ShouldQueue
     {
         $sendEmail = new EmailSend($this->email);
         \Mail::to($this->email->recipient)->send($sendEmail);
-        event(new MessageSending($sendEmail, ['id' => $this->email->id]));
+        event(new MessageSending($sendEmail, ['id' => $this->email->id, 'type' => 'sent']));
+
+        $fail = \Mail::failures();
+        if(!empty($fail)) event(new MessageSending($sendEmail, ['id' => $this->email->id, 'type' => 'failed']));
+
     }
 }
