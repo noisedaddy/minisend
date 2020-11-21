@@ -74,8 +74,6 @@
 </template>
 
 <script>
-    import FileInput from '@argon/components/Inputs/FileInput'
-    import UsersAPI from "@services/api/UsersAPI";
     import EmailAPI from "@services/api/EmailAPI";
 
     export default {
@@ -84,9 +82,6 @@
         },
         name: "AddEditForm",
         props: ["email","attachments"],
-        components: {
-            FileInput,
-        },
         data() {
             return {
                 sender: '',
