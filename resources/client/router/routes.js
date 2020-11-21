@@ -4,10 +4,6 @@ import AuthLayout from "@src/Auth/AuthLayout"
 import Login from "@src/Auth/Login"
 import DashboardLayout from "@src/Dashboard/DashboardLayout";
 import OverviewIndex from "@src/Dashboard/Overview/Index";
-import UsersIndex from "@src/Dashboard/Users/List/Index"
-import UsersCreate from "@src/Dashboard/Users/Create/Index"
-import UsersEdit from "@src/Dashboard/Users/Edit/Index"
-
 import EmailsIndex from "@src/Dashboard/Emails/List/Index"
 import EmailsCreate from "@src/Dashboard/Emails/Create/Index"
 import EmailsEdit from "@src/Dashboard/Emails/Edit/Index"
