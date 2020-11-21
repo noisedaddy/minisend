@@ -48,9 +48,6 @@
                 default: () => {}
             }
         },
-        components: {
-            EmailListTable
-        },
         data() {
             return {
                 search_phrase: ''
