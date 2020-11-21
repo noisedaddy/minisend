@@ -1,70 +1,70 @@
-<template>
-    <div class="card">
-        <div class="card-header">
-            <h3>{{$t('filters')}}</h3>
-        </div>
-        <form role="form" class="col-md-12">
-            <div class="card-body">
-                <div class="row">
-                    <base-input class="col-12" label="Search Options">
-                        <el-select multiple
-                            id="role-select"
-                            class="select-primary"
-                            v-model="value.role"
-                            placeholder="Select roles">
-                            <el-option v-for="option in value.roleOptions"
-                                    class="select-primary"
-                                    :value="option.value"
-                                    :label="option.label"
-                                    :key="option.label">
-                            </el-option>
-                        </el-select>
-                    </base-input>
-                </div>
-                <div class="row mt-3">
-                    <base-input class="col-12" label="Search Term" v-model="search_phrase">
-                    </base-input>
-                </div>
-                <div class="form-group row">
-                    <base-button type="primary"
-                                 class="my-4"
-                                 @click="searchStart">
-                        {{ $t('Search') }}
-                    </base-button>
-                </div>
-            </div>
-        </form>
-    </div>
-</template>
-<script>
-    import UsersAPI from "@services/api/UsersAPI";
+<!--<template>-->
+<!--    <div class="card">-->
+<!--        <div class="card-header">-->
+<!--            <h3>{{$t('filters')}}</h3>-->
+<!--        </div>-->
+<!--        <form role="form" class="col-md-12">-->
+<!--            <div class="card-body">-->
+<!--                <div class="row">-->
+<!--                    <base-input class="col-12" label="Search Options">-->
+<!--                        <el-select multiple-->
+<!--                            id="role-select"-->
+<!--                            class="select-primary"-->
+<!--                            v-model="value.role"-->
+<!--                            placeholder="Select roles">-->
+<!--                            <el-option v-for="option in value.roleOptions"-->
+<!--                                    class="select-primary"-->
+<!--                                    :value="option.value"-->
+<!--                                    :label="option.label"-->
+<!--                                    :key="option.label">-->
+<!--                            </el-option>-->
+<!--                        </el-select>-->
+<!--                    </base-input>-->
+<!--                </div>-->
+<!--                <div class="row mt-3">-->
+<!--                    <base-input class="col-12" label="Search Term" v-model="search_phrase">-->
+<!--                    </base-input>-->
+<!--                </div>-->
+<!--                <div class="form-group row">-->
+<!--                    <base-button type="primary"-->
+<!--                                 class="my-4"-->
+<!--                                 @click="searchStart">-->
+<!--                        {{ $t('Search') }}-->
+<!--                    </base-button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--</template>-->
+<!--<script>-->
+<!--    import UsersAPI from "@services/api/UsersAPI";-->
 
-    export default {
-        name: 'UserListFilters',
-        props: {
-            value: {
-                type: Object,
-                default: () => {}
-            }
-        },
-        data() {
-            return {
-                search_phrase: ''
-            }
-        },
-        methods: {
-            searchStart() {
-                console.log(this.value);
-                UsersAPI
-                    .search(this.search_phrase,this.value)
-                    .then((data) => {
-                        console.log(data);
-                        this.$router.push('/dashboard/overview');
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    })
-            }
-        }
-    }
-</script>
+<!--    export default {-->
+<!--        name: 'UserListFilters',-->
+<!--        props: {-->
+<!--            value: {-->
+<!--                type: Object,-->
+<!--                default: () => {}-->
+<!--            }-->
+<!--        },-->
+<!--        data() {-->
+<!--            return {-->
+<!--                search_phrase: ''-->
+<!--            }-->
+<!--        },-->
+<!--        methods: {-->
+<!--            searchStart() {-->
+<!--                console.log(this.value);-->
+<!--                UsersAPI-->
+<!--                    .search(this.search_phrase,this.value)-->
+<!--                    .then((data) => {-->
+<!--                        console.log(data);-->
+<!--                        this.$router.push('/dashboard/overview');-->
+<!--                    })-->
+<!--                    .catch((err) => {-->
+<!--                        console.log(err);-->
+<!--                    })-->
+<!--            }-->
+<!--        }-->
+<!--    }-->
+<!--</script>-->

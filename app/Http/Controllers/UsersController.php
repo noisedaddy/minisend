@@ -30,15 +30,15 @@ class UsersController extends Controller
      * page - current paginated page
      * ?page=5&search[name]=john,mike&account_id=4,role=3&order=acs
      */
-    public function index()
-    {
-        $user = auth()->user();
-        $url = Request::all();
-        $query = $this->usersRepo->getAllowedQueryFor($user);
-        $data = $this->usersRepo->filterQuery($url, $query)->paginate();
-
-        return UserResource::collection($data);
-    }
+//    public function index()
+//    {
+//        $user = auth()->user();
+//        $url = Request::all();
+//        $query = $this->usersRepo->getAllowedQueryFor($user);
+//        $data = $this->usersRepo->filterQuery($url, $query)->paginate();
+//
+//        return UserResource::collection($data);
+//    }
 
     public function show($id)
     {
@@ -58,15 +58,15 @@ class UsersController extends Controller
 
     }
 
-    public function store(CreateUser $request)
-    {
-        $user = auth()->user();
-        $data = $request->all();
-
-        $newUser = $this->usersRepo->create($data);
-
-        return new UserResource($newUser);
-    }
+//    public function store(CreateUser $request)
+//    {
+//        $user = auth()->user();
+//        $data = $request->all();
+//
+//        $newUser = $this->usersRepo->create($data);
+//
+//        return new UserResource($newUser);
+//    }
 
     /**
      * Update the specified resource in storage.
@@ -76,11 +76,11 @@ class UsersController extends Controller
      * @return UserResource
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function update(UpdateUser $request, \App\Models\User $user)
-    {
-        $this->usersRepo->update($request->toArray(), $user);
-        return new UserResource($user);
-    }
+//    public function update(UpdateUser $request, \App\Models\User $user)
+//    {
+//        $this->usersRepo->update($request->toArray(), $user);
+//        return new UserResource($user);
+//    }
 
     /**
      * Remove the specified resource from storage.
@@ -90,11 +90,11 @@ class UsersController extends Controller
      * @throws \Exception
      */
 
-    public function destroy(\App\Models\User $user)
-    {
-        $this->usersRepo->delete($user);
-        return response()->json(null, 204);
-    }
+//    public function destroy(\App\Models\User $user)
+//    {
+//        $this->usersRepo->delete($user);
+//        return response()->json(null, 204);
+//    }
 
     /**
      * Upload avatar, work in progress
@@ -102,18 +102,18 @@ class UsersController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function uploadAvatar($id){
-
-        $file = FileUpload::handle();
-        if (isset($file['success'])) {
-            $user = User::find($id);
-            $user->update(['avatar'=>public_path() . '/uploads/'.$file['success']]);
-            return $this->dataResponse($file['success']);
-        } else{
-            return $this->errorResponse($file['error']);
-        }
-
-    }
+//    public function uploadAvatar($id){
+//
+//        $file = FileUpload::handle();
+//        if (isset($file['success'])) {
+//            $user = User::find($id);
+//            $user->update(['avatar'=>public_path() . '/uploads/'.$file['success']]);
+//            return $this->dataResponse($file['success']);
+//        } else{
+//            return $this->errorResponse($file['error']);
+//        }
+//
+//    }
 
     /**
      * Search
