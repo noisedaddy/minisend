@@ -65,10 +65,11 @@
     } from 'element-ui'
     import EmailAPI from '../../../../services/api/EmailAPI'
     import BaseServerSidePagination from '../../../../shared/BaseServerSidePagination'
+    import EmailListFilters from "@src/Dashboard/Emails/Components/EmailListFilters";
 
     export default {
         name: "EmailListTable",
-        props: ['emails'],
+        // props: ['emails'],
         components: {
             [Table.name]: Table,
             [TableColumn.name]: TableColumn,
@@ -79,7 +80,7 @@
         },
         data() {
             return {
-                // emails: [],
+                emails: [],
                 selectedRows: [],
                 activeRow: null,
                 pagination: {
@@ -113,11 +114,17 @@
             },
             setActiveRow(row) {
                 this.activeRow = row;
+            },
+            setValue: function(value) {
+                this.emails = value;
             }
         },
         mounted() {
             this.fetchEmails();
         },
+        created(){
+            this.$parent.$on('searchStartChild', this.setValue);
+        }
     }
 </script>
 

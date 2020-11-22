@@ -55,7 +55,6 @@
         },
         methods: {
             searchStart() {
-                console.log(this.value);
                 EmailAPI
                     .search(this.search_phrase,this.value)
                     .then((data) => {

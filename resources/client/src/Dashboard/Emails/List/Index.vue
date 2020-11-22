@@ -152,7 +152,9 @@
             },
              searchStart(res) {
                 this.isLoading = true;
-                this.emails= res;
+                //Emit value to child
+                 this.$emit('searchStartChild', res.data);
+                // this.emails= res;
                 this.isLoading = false;
 
             }
