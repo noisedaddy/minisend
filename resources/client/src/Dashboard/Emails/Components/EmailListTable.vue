@@ -68,6 +68,7 @@
 
     export default {
         name: "EmailListTable",
+        props: ['emails'],
         components: {
             [Table.name]: Table,
             [TableColumn.name]: TableColumn,
@@ -78,7 +79,7 @@
         },
         data() {
             return {
-                emails: [],
+                // emails: [],
                 selectedRows: [],
                 activeRow: null,
                 pagination: {

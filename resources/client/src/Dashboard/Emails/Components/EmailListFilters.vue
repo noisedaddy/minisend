@@ -28,7 +28,7 @@
                 <div class="form-group row">
                     <base-button type="primary"
                                  class="my-4"
-                                 @click="searchStart">
+                                 @click="searchStart()">
                         {{ $t('Search') }}
                     </base-button>
                 </div>
@@ -59,14 +59,7 @@
                 EmailAPI
                     .search(this.search_phrase,this.value)
                     .then((data) => {
-                        console.log(data);
-                        // this.EmailListTable.data().emails = data;
-                        // this.$emit('clicked', data);
-                        // this.emails = data;
-                        // this.$router.push('/dashboard/emails');
-                        // this.$router.push({path: '/dashboard/emails', component: EmailListTable, params: { emails: data}});
-                        // this.$router.go({path: this.$router.path, component: EmailListTable, params: { emails: data}});
-                        // this.$router.go({path:this.$router.path});
+                        this.$emit('searchStart', data);
                     })
                     .catch((err) => {
                         console.log(err);

@@ -56,6 +56,7 @@
                 >
                     <email-list-filters
                         v-model="filters"
+                        @searchStart="searchStart($event)"
                     >
                     </email-list-filters>
                 </div>
@@ -127,7 +128,7 @@
             }
         },
         mounted() {
-            this.fetchUsers();
+            this.fetchEmails();
             if (this.$route.params.emailId) {
                 const row = {id: parseInt(this.$route.params.emailId)};
                 this.$refs.table.setActiveRow(row);
@@ -135,9 +136,9 @@
             }
         },
         methods: {
-            async fetchUsers() {
+            async fetchEmails() {
                 this.isLoading = true;
-                this.users = await EmailAPI.getAll();
+                this.emails = await EmailAPI.getAll();
                 this.isLoading = false;
             },
             rowClicked(row) {
@@ -148,8 +149,15 @@
                 } else {
                     this.$router.push(`/dashboard/emails`)
                 }
+            },
+             searchStart(res) {
+                this.isLoading = true;
+                this.emails= res;
+                this.isLoading = false;
+
             }
-        }
+        },
+
     };
 </script>
 <style></style>
