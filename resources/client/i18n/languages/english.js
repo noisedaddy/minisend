@@ -9,5 +9,9 @@ export default {
     candidates: "Candidates",
 
     filters: "Filters",
-    newUser: "New User"
+    newEmail: "New Email",
+    emails: "emails",
+    Search: "Search",
+    Send: "Send"
+
 }
