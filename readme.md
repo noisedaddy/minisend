@@ -20,7 +20,7 @@
 
 9. `php artisan queue:work` to be able to queue emails for 30sec
 
-10. Route for login is `/auth/login` login: admin@admin.com 12123
+10. Route for login is `/auth/login` login: admin@admin.com 123123
 
 ## Guidelines
 
