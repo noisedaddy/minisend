@@ -31,4 +31,22 @@ class ExampleTest extends TestCase
             return $job->user->id = $user->id;
         });
     }
+
+    public function testAPICovid(){
+
+        $this->json('get', 'api/home')
+            ->assertStatus(200)
+            ->assertJsonStructure(
+                [
+                    'data' => [
+                            'Cases',
+                            'City',
+                            'Country',
+                            'CountryCode',
+                            'Date',
+
+                    ]
+                ]
+            );
+    }
 }
