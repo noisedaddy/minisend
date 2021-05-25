@@ -10,5 +10,11 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/emails/files/delete', 'EmailController@deleteFiles');
     Route::apiResource('users', 'UsersController');
     Route::apiResource('emails', 'EmailController');
-
+    Route::get('/home', 'CovidController@index');
+//    Route::get('/example/job', function () {
+//    });
+});
+Route::get('/example/job', function () {
+    $user = \App\Models\User::first();
+   \App\Jobs\ExampleJob::dispatch($user);
 });

@@ -30,3 +30,6 @@
 
 3. Email status is updated from event Listiner after the mail is sent from queue
 
+4. Create minisend_v6_testing db on yout localhost
+
+4. For testing run `php artisan migrate --database=testing` or ` php artisan migrate --env=testing`

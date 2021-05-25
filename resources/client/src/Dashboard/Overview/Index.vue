@@ -19,6 +19,7 @@
 <script>
     import BaseHeader from '@argon/components/BaseHeader';
     import BaseBreadcrumbs from "@/shared/BaseBreadcrumbs";
+    import CovidAPI from "@services/api/CovidAPI";
 
     export default {
         name: "OverviewIndex",
@@ -27,7 +28,21 @@
             BaseHeader,
         },
         data() {
-            return {};
+            return {
+                isLoading: true,
+                covid: {data: [], meta: {}},
+            };
+        },
+        mounted() {
+            this.fetchCovid();
+        },
+        methods: {
+            async fetchCovid(){
+                this.isLoading = true;
+                this.covid = await CovidAPI.getAll();
+                console.log(this.covid);
+                this.isLoading = false;
+            }
         }
     };
 </script>
